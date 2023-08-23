@@ -32,7 +32,7 @@ function UserListPage() {
 							<Link
 								to={`/home/userdelete/${item.id}`}
 								className="rounded-md bg-red-100 px-3 my-1 ms-1 hover:bg-red-300 inline-block">
-								Xóa người dùng
+								Xóa
 							</Link>
 						</td>
 					</tr>
