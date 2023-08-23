@@ -7,7 +7,7 @@ function HomePage() {
 	return (
 		<div className="h-screen w-full">
 			<Header />
-			<div className="main flex justify-between py-5 h-[80%]">
+			<div className="main flex justify-between py-5 h-[85%]">
 				<Sidebar />
 				<div className="w-auto grow overflow-y-auto px-4">
 					<Outlet />

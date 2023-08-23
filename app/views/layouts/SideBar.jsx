@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import sitebarMenuList from "../../config/sitebarMenuList";
+import sitebarMenuList from "~/config/sitebarMenuList";
 function Sidebar() {
 	return (
 		<aside className="side-bar shrink-0 shadow-lg overflow-y-auto w-[290px]">
