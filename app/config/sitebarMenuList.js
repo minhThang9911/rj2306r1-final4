@@ -10,65 +10,65 @@ import ImportExportIcon from "@mui/icons-material/ImportExport";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 
 const sitebarMenuList = [
-	{
-		title: "Bảng thông tin",
-		icon: DashboardIcon,
-		link: "/home/dashboard",
-		role: "view_dashboard",
-	},
-	{
-		title: "Nhập hàng",
-		icon: AddShoppingCartIcon,
-		link: "/home/importproduct",
-		role: "view_store",
-	},
-	{
-		title: "Xuất hàng",
-		icon: DeliveryDiningIcon,
-		link: "/home/exportproduct",
-		role: "view_store",
-	},
-	{
-		title: "Lịch sử giao dịch",
-		icon: ImportExportIcon,
-		link: "/home/storage",
-		role: "view_store",
-	},
-	{
-		title: "Hàng hóa",
-		icon: StoreIcon,
-		link: "/home/productlist",
-		role: "view_stock",
-	},
-	{
-		title: "Nhà cung ứng",
-		icon: SupervisorAccountIcon,
-		link: "/home/vendorlist",
-		role: "view_product",
-	},
-	{
-		title: "Khách hàng",
-		icon: AssignmentIndIcon,
-		link: "/home/clientlist",
-		role: "view_client",
-	},
-	{
-		title: "Nhân sự",
-		icon: ManageAccountsIcon,
-		link: "/home/userlist",
-		role: "view_carrier",
-	},
-	{
-		title: "Cài đặt",
-		icon: SettingsIcon,
-		link: "/home/settings",
-		role: "view_provider",
-	},
-	{
-		title: "Thoát",
-		icon: ExitToAppIcon,
-		link: "/home/exit",
-		role: "view_provider",
-	},
+    {
+        title: "Bảng thông tin",
+        icon: DashboardIcon,
+        link: "/home/dashboard",
+        pemision: "any",
+    },
+    {
+        title: "Nhập hàng",
+        icon: AddShoppingCartIcon,
+        link: "/home/importproduct",
+        pemision: "any",
+    },
+    {
+        title: "Xuất hàng",
+        icon: DeliveryDiningIcon,
+        link: "/home/exportproduct",
+        pemision: "any",
+    },
+    {
+        title: "Lịch sử giao dịch",
+        icon: ImportExportIcon,
+        link: "/home/storage",
+        pemision: "any",
+    },
+    {
+        title: "Hàng hóa",
+        icon: StoreIcon,
+        link: "/home/productlist",
+        pemision: "any",
+    },
+    {
+        title: "Nhà cung ứng",
+        icon: SupervisorAccountIcon,
+        link: "/home/vendorlist",
+        pemision: "any",
+    },
+    {
+        title: "Khách hàng",
+        icon: AssignmentIndIcon,
+        link: "/home/clientlist",
+        pemision: "any",
+    },
+    {
+        title: "Nhân sự",
+        icon: ManageAccountsIcon,
+        link: "/home/userlist",
+        pemision: "any",
+    },
+    {
+        title: "Cài đặt",
+        icon: SettingsIcon,
+        link: "/home/settings",
+        pemision: "any",
+    },
+    {
+        title: "Thoát",
+        icon: ExitToAppIcon,
+        link: "/home/exit",
+        pemision: "any",
+    },
 ];
 export default sitebarMenuList;
