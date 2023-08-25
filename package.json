@@ -10,8 +10,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.5",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.6",
+    "@mui/material": "^5.14.6",
+    "@mui/x-data-grid": "^6.11.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@remix-run/css-bundle": "^1.19.3",
     "@remix-run/node": "^1.19.3",

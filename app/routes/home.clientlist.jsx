@@ -1,14 +1,25 @@
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { api } from "~/config";
+import { fetcher } from "~/utils/api";
+
+export const loader = async () => {
+	const res = await fetcher.get(api.link.clients);
+	return json(res.data);
+};
+
 function ClientListPage() {
-    return (
-        <table className="w-full">
-            <thead>
-                <th>Tên</th>
-                <th>Quốc Gia</th>
-                <th>Địa chỉ</th>
-                <th>Thao tác</th>
-            </thead>
-            <tbody>
-                {/* {clientList.map((item, index) => (
+	const clientList = useLoaderData();
+	return (
+		<table className="w-full">
+			<thead>
+				<th>Tên</th>
+				<th>Quốc Gia</th>
+				<th>Địa chỉ</th>
+				<th>Thao tác</th>
+			</thead>
+			<tbody>
+				{clientList.map((item, index) => (
 					<tr key={index} className="shadow-md leading-10">
 						<td>{item.name}</td>
 						<td className="text-center">{item.country}</td>
@@ -26,10 +37,10 @@ function ClientListPage() {
 							</Link>
 						</td>
 					</tr>
-				))} */}
-            </tbody>
-        </table>
-    );
+				))}
+			</tbody>
+		</table>
+	);
 }
 
 export default ClientListPage;
