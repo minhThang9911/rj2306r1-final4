@@ -1,16 +1,14 @@
-import { Link } from "@remix-run/react";
-import vendorList from "../_fake/vendorList.js";
 function VendorListPage() {
-	return (
-		<table className="w-full">
-			<thead>
-				<th>Tên</th>
-				<th>Quốc Gia</th>
-				<th>Địa chỉ</th>
-				<th>Thao tác</th>
-			</thead>
-			<tbody>
-				{vendorList.map((item, index) => (
+    return (
+        <table className="w-full">
+            <thead>
+                <th>Tên</th>
+                <th>Quốc Gia</th>
+                <th>Địa chỉ</th>
+                <th>Thao tác</th>
+            </thead>
+            <tbody>
+                {/* {vendorList.map((item, index) => (
 					<tr key={index} className="shadow-md leading-10">
 						<td>{item.name}</td>
 						<td className="text-center">{item.country}</td>
@@ -28,10 +26,10 @@ function VendorListPage() {
 							</Link>
 						</td>
 					</tr>
-				))}
-			</tbody>
-		</table>
-	);
+				))} */}
+            </tbody>
+        </table>
+    );
 }
 
 export default VendorListPage;

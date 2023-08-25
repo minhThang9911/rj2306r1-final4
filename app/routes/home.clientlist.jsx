@@ -1,16 +1,14 @@
-import { Link } from "@remix-run/react";
-import clientList from "../_fake/buyerList";
 function ClientListPage() {
-	return (
-		<table className="w-full">
-			<thead>
-				<th>Tên</th>
-				<th>Quốc Gia</th>
-				<th>Địa chỉ</th>
-				<th>Thao tác</th>
-			</thead>
-			<tbody>
-				{clientList.map((item, index) => (
+    return (
+        <table className="w-full">
+            <thead>
+                <th>Tên</th>
+                <th>Quốc Gia</th>
+                <th>Địa chỉ</th>
+                <th>Thao tác</th>
+            </thead>
+            <tbody>
+                {/* {clientList.map((item, index) => (
 					<tr key={index} className="shadow-md leading-10">
 						<td>{item.name}</td>
 						<td className="text-center">{item.country}</td>
@@ -28,10 +26,10 @@ function ClientListPage() {
 							</Link>
 						</td>
 					</tr>
-				))}
-			</tbody>
-		</table>
-	);
+				))} */}
+            </tbody>
+        </table>
+    );
 }
 
 export default ClientListPage;
