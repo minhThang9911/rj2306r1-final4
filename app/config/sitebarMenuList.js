@@ -31,7 +31,7 @@ const sitebarMenuList = [
 	{
 		title: "Lịch sử giao dịch",
 		icon: ImportExportIcon,
-		link: "/home/storage",
+		link: "/home/history",
 		role: "view_store",
 	},
 	{
