@@ -3,7 +3,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import Button from "~/components/Buton";
 import { api } from "~/config";
-import { fetcher } from "~/utils/api";
+import { fetcher } from "~/server/api.server";
 
 export const loader = async () => {
 	const res = await fetcher.get(api.link.vendors);

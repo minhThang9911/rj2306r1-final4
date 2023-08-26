@@ -1,45 +1,31 @@
+import { DataGrid } from "@mui/x-data-grid";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import Button from "~/components/Buton";
 import { api } from "~/config";
-import { fetcher } from "~/utils/api";
+import { fetcher } from "~/server/api.server";
 
 export const loader = async () => {
 	const res = await fetcher.get(api.link.clients);
 	return json(res.data);
 };
 
+const columns = [
+	{ field: "name", headerName: "Tên khách hàng", width: 250 },
+	{ field: "country", headerName: "Quốc Gia", width: 130 },
+	{ field: "address", headerName: "Địa chỉ", width: 130 },
+];
+
 function ClientListPage() {
 	const clientList = useLoaderData();
 	return (
-		<table className="w-full">
-			<thead>
-				<th>Tên</th>
-				<th>Quốc Gia</th>
-				<th>Địa chỉ</th>
-				<th>Thao tác</th>
-			</thead>
-			<tbody>
-				{clientList.map((item, index) => (
-					<tr key={index} className="shadow-md leading-10">
-						<td>{item.name}</td>
-						<td className="text-center">{item.country}</td>
-						<td>{item.address}</td>
-						<td className="text-center">
-							<Link
-								to={`/home/useredit/${item.id}`}
-								className="rounded-md bg-yellow-100 px-3 my-1 me-1 hover:bg-yellow-300 inline-block">
-								Chỉnh sửa
-							</Link>
-							<Link
-								to={`/home/userdelete/${item.id}`}
-								className="rounded-md bg-red-100 px-3 my-1 ms-1 hover:bg-red-300 inline-block">
-								Xóa
-							</Link>
-						</td>
-					</tr>
-				))}
-			</tbody>
-		</table>
+		<div className="h-full flex flex-col justify-start">
+			<div className="flex justify-end mb-3">
+				<Button variant={["edit"]}>Sửa</Button>
+				<Button variant={["delete"]}>Xóa</Button>
+			</div>
+			<DataGrid rows={clientList} columns={columns} autoPageSize />
+		</div>
 	);
 }
 
