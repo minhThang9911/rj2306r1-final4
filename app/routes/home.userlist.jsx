@@ -19,6 +19,7 @@ import {
 import { api } from "~/config";
 import { fetcherClient } from "~/api";
 import { v4 } from "uuid";
+import { uploadImgFromFile } from "~/api/upload";
 
 export const loader = async () => {
 	const res = await fetcherServer.get(api.link.users);
@@ -123,7 +124,18 @@ function UserListPage() {
 	return (
 		<div className="h-full flex flex-col justify-start">
 			<div className="mb-2 flex justify-between">
-				<div></div>
+				<div>
+					<Button
+						onClick={() => {
+							const res = uploadImgFromFile();
+							console.log(res);
+						}}
+						className="block"
+						variant="contained"
+						color="info">
+						test
+					</Button>
+				</div>
 				<Button
 					onClick={handleNew}
 					className="block"
