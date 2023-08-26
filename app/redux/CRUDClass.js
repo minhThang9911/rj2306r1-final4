@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetcher } from "~/server/api.server";
+import { fetcherClient } from "~/api";
+
 export default class CRUDClass {
 	constructor(name, apiPath) {
 		this.name = name;
@@ -34,19 +35,19 @@ export default class CRUDClass {
 	});
 	actions = this.slice.actions;
 	getListAsync = () => async (dispatch) => {
-		const res = await fetcher.get(this.apiPath);
+		const res = await fetcherClient.get(this.apiPath);
 		dispatch(this.slice.actions.getListDone(res.data));
 	};
 	addAsync = (item) => async (dispatch) => {
-		await fetcher.post(this.apiPath);
+		await fetcherClient.post(this.apiPath);
 		dispatch(this.slice.actions.addDoneDone(item));
 	};
 	deleteAsync = (item) => async (dispatch) => {
-		await fetcher.delete(`${this.apiPath}/${item.id}`);
+		await fetcherClient.delete(`${this.apiPath}/${item.id}`);
 		dispatch(this.slice.actions.deleteDone(item));
 	};
 	updateAsync = (item) => async (dispatch) => {
-		await fetcher.put(`${this.apiPath}/${item.id}`);
+		await fetcherClient.put(`${this.apiPath}/${item.id}`);
 		dispatch(this.slice.actions.updateDone(item));
 	};
 	reducer = this.slice.reducer;

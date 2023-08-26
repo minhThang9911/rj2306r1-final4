@@ -1,11 +1,12 @@
+const baseUrl = "https://api.minhthang.site/";
 export const api = {
-    baseUrl: "https://api.minhthang.site/",
-    link: {
-        users: "users",
-        vendors: "vendors",
-        products: "products",
-        clients: "clients",
-        transaction: "transaction",
-        notification: "notification",
-    },
+	baseUrl,
+	link: {
+		users: "users",
+		vendors: "vendors",
+		products: "products",
+		clients: "clients",
+		transaction: "transaction",
+		notification: "notification",
+	},
 };
