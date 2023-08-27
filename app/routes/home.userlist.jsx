@@ -1,10 +1,11 @@
 import { useLoaderData } from "@remix-run/react";
-import { fetcherServer, getUserList } from "~/server/api.server";
+import { fetcherServer } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useMemo, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import FileBase64 from "react-file-base64";
 import {
 	Button,
 	Fade,
@@ -13,13 +14,11 @@ import {
 	MenuItem,
 	Modal,
 	Select,
-	SvgIcon,
 	TextField,
 } from "@mui/material";
 import { api } from "~/config";
 import { fetcherClient } from "~/api";
 import { v4 } from "uuid";
-import { uploadImgFromFile } from "~/api/upload";
 
 export const loader = async () => {
 	const res = await fetcherServer.get(api.link.users);
@@ -106,7 +105,7 @@ function UserListPage() {
 					<GridActionsCellItem
 						key={"b"}
 						icon={<EditIcon />}
-						label="Duplace"
+						label="Sửa"
 						onClick={editUser(params.row)}
 					/>,
 					<GridActionsCellItem
@@ -124,18 +123,7 @@ function UserListPage() {
 	return (
 		<div className="h-full flex flex-col justify-start">
 			<div className="mb-2 flex justify-between">
-				<div>
-					<Button
-						onClick={() => {
-							const res = uploadImgFromFile();
-							console.log(res);
-						}}
-						className="block"
-						variant="contained"
-						color="info">
-						test
-					</Button>
-				</div>
+				<div></div>
 				<Button
 					onClick={handleNew}
 					className="block"
@@ -168,7 +156,17 @@ function UserListPage() {
 										variant="outlined"
 										color="info">
 										Đổi Avartar
-										<input type="file" hidden />
+										<FileBase64
+											type="file"
+											multiple={false}
+											onDone={({ base64 }) => {
+												setSelectUser((pre) => ({
+													...pre,
+													avatar: base64,
+												}));
+											}}
+											onChange={(e) => e.target.files[0]}
+										/>
 									</Button>
 								</div>
 							</div>
@@ -196,7 +194,6 @@ function UserListPage() {
 										name="email"
 										onChange={handleSelectUser}
 									/>
-
 									<FormControl fullWidth>
 										<InputLabel id="user-role-select-label">
 											Vai trò

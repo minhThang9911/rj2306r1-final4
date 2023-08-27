@@ -24,28 +24,28 @@ export const uploadImgFromFile = async (imgFile) => {
 	return res;
 };
 
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-myHeaders.append("Cookie", "PHPSESSID=hhjsqhe7vk978rs0m4t2tch0vo");
+// var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+// myHeaders.append("Cookie", "PHPSESSID=hhjsqhe7vk978rs0m4t2tch0vo");
 
-var urlencoded = new URLSearchParams();
-urlencoded.append("action", "upload");
-urlencoded.append(
-	"source",
-	"https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/157755/Originals/hinh-nen-mau-hong%20(4).jpg"
-);
+// var urlencoded = new URLSearchParams();
+// urlencoded.append("action", "upload");
+// urlencoded.append(
+// 	"source",
+// 	"https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/157755/Originals/hinh-nen-mau-hong%20(4).jpg"
+// );
 
-var requestOptions = {
-	method: "POST",
-	headers: myHeaders,
-	body: urlencoded,
-	redirect: "follow",
-};
+// var requestOptions = {
+// 	method: "POST",
+// 	headers: myHeaders,
+// 	body: urlencoded,
+// 	redirect: "follow",
+// };
 
-fetch(
-	"https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5",
-	requestOptions
-)
-	.then((response) => response.text())
-	.then((result) => console.log(result))
-	.catch((error) => console.log("error", error));
+// fetch(
+// 	"https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5",
+// 	requestOptions
+// )
+// 	.then((response) => response.text())
+// 	.then((result) => console.log(result))
+// 	.catch((error) => console.log("error", error));
