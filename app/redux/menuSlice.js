@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sitebarMenus } from "~/config";
+import { sidebarMainMenus } from "~/config/sitebarMenuList";
 
 const initialState = {
     isOpen: false,
@@ -14,7 +14,7 @@ export const menuSlice = createSlice({
             state.isOpen = !state.isOpen;
         },
         getList: (state, action) => {
-            state.menuList = sitebarMenus.filter(
+            state.menuList = sidebarMainMenus.filter(
                 (item) => item.pemision === action.payload
             );
         },
