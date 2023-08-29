@@ -22,6 +22,7 @@ import {
     sidebarMainMenus,
     sidebarSettingMenus,
 } from "~/config/sitebarMenuList";
+import { useNavigate } from "@remix-run/react";
 
 const drawerWidth = 240;
 
@@ -55,24 +56,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
-
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -93,6 +76,7 @@ const Drawer = styled(MuiDrawer, {
 export default function Sidebar({ children }) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -159,6 +143,7 @@ export default function Sidebar({ children }) {
                                 disablePadding
                                 sx={{ display: "block" }}>
                                 <ListItemButton
+                                    onClick={navigate(item.link)}
                                     sx={{
                                         minHeight: 48,
                                         justifyContent: open
