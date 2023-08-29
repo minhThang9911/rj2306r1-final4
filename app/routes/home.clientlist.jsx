@@ -107,8 +107,10 @@ function ClientListPage() {
 			<div className="mb-2 flex justify-between">
 				<div></div>
 				<Button
+					sx={{
+						marginRight: "1em",
+					}}
 					onClick={handleNew}
-					className="block"
 					variant="contained"
 					color="info">
 					Thêm mới

@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSubmit } from "@remix-run/react";
 import { fetcherServer } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
@@ -17,63 +17,88 @@ import {
 	TextField,
 } from "@mui/material";
 import { api } from "~/config";
-import { fetcherClient } from "~/api";
 import { v4 } from "uuid";
+import { uploadImg } from "~/server/upload.server";
 
 export const loader = async () => {
 	const res = await fetcherServer.get(api.link.users);
-
 	return json(res.data);
 };
 
+export const action = async ({ request }) => {
+	const { _action, ...data } = await request.json();
+	switch (_action) {
+		case "delete": {
+			const res = await fetcherServer.delete(
+				`${api.link.users}/${data.id}`
+			);
+			console.log(res);
+			return data;
+		}
+		case "update": {
+			const imgUrl = await uploadImg(
+				data.avatar.replace("data:image/jpeg;base64,", "")
+			);
+			if (imgUrl !== "error") {
+				data.avatar = imgUrl;
+			}
+			await fetcherServer.put(`${api.link.users}/${data.id}`, data);
+
+			return data;
+		}
+		default: {
+			return data;
+		}
+	}
+};
+
 function UserListPage() {
-	const [rows, setRows] = useState(useLoaderData());
+	const submit = useSubmit();
+	const rows = useLoaderData();
+	const [avatar, setAvatar] = useState("");
 	const [openModal, setOpenModal] = useState(false);
 	const [seletedUser, setSelectUser] = useState();
-	const [isNew, setIsNew] = useState(false);
-	const deleteUser = useCallback(
-		(id) => () => {
-			setTimeout(() => {
-				setRows((pre) => pre.filter((row) => row.id !== id));
-			});
-		},
-		[]
-	);
+	const [seletedUserBackup, setSelectUserBackup] = useState();
+
 	const editUser = useCallback(
 		(user) => () => {
+			setAvatar(user.avatar);
 			setSelectUser(user);
+			setSelectUserBackup(user);
 			setOpenModal(true);
 		},
 		[]
 	);
-
 	const handleSelectUser = (e) => {
 		setSelectUser({
 			...seletedUser,
 			[e.target.name]: e.target.value,
 		});
 	};
-
 	const handleSaveUser = async () => {
-		const tmp = [...rows];
-		if (isNew) {
-			await fetcherClient.post(api.link.users, seletedUser);
-			tmp.push(seletedUser);
-		} else {
-			await fetcherClient.put(
-				`${api.link.users}/${seletedUser.id}`,
-				seletedUser
+		if (
+			JSON.stringify(seletedUser) !== JSON.stringify(seletedUserBackup) ||
+			avatar !== seletedUser.avatar
+		) {
+			submit(
+				{
+					...seletedUser,
+					_action: "update",
+					avatar,
+				},
+				{
+					method: "POST",
+					encType: "application/json",
+				}
 			);
-			const index = rows.findIndex((item) => item.id === seletedUser.id);
-			tmp[index] = seletedUser;
+		} else {
+			console.log("no change");
 		}
-		setRows(tmp);
-		setIsNew(false);
 		setOpenModal(false);
 	};
 
 	const handleNew = () => {
-		setIsNew(true);
+		setAvatar("/img/placeholder-image.jpg");
 		setSelectUser({
 			id: v4(),
 			avatar: "",
@@ -112,12 +137,23 @@ function UserListPage() {
 						key={"a"}
 						icon={<DeleteIcon />}
 						label="Xóa"
-						onClick={deleteUser(params.row.id)}
+						onClick={() =>
+							submit(
+								{
+									_action: "delete",
+									...params.row,
+								},
+								{
+									method: "POST",
+									encType: "application/json",
+								}
+							)
+						}
 					/>,
 				],
 			},
 		],
-		[deleteUser, editUser]
+		[editUser, submit]
 	);
 
 	return (
@@ -125,8 +161,10 @@ function UserListPage() {
 			<div className="mb-2 flex justify-between">
 				<div></div>
 				<Button
+					sx={{
+						marginRight: "1em",
+					}}
 					onClick={handleNew}
-					className="block"
 					variant="contained"
 					color="info">
 					Thêm mới
@@ -144,7 +182,7 @@ function UserListPage() {
 								<div className="flex-grow relative">
 									<img
 										className="block w-full rounded-3xl absolute top-[50%] translate-y-[-50%]"
-										src={seletedUser?.avatar}
+										src={avatar}
 										alt={seletedUser?.name}
 									/>
 								</div>
@@ -157,13 +195,9 @@ function UserListPage() {
 										color="info">
 										Đổi Avartar
 										<FileBase64
-											type="file"
 											multiple={false}
 											onDone={({ base64 }) => {
-												setSelectUser((pre) => ({
-													...pre,
-													avatar: base64,
-												}));
+												setAvatar(base64);
 											}}
 											onChange={(e) => e.target.files[0]}
 										/>
@@ -220,12 +254,18 @@ function UserListPage() {
 										</Select>
 									</FormControl>
 								</div>
-								<div className="flex-shrink-0 text-center">
+								<div className="flex-shrink-0 flex justify-around">
 									<Button
 										variant="contained"
 										color="success"
 										onClick={handleSaveUser}>
 										Lưu thay đổi
+									</Button>
+									<Button
+										variant="contained"
+										color="warning"
+										onClick={() => setOpenModal(false)}>
+										Bỏ qua
 									</Button>
 								</div>
 							</div>

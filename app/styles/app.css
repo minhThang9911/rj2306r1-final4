@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+	input[type="file"] {
+		display: none;
+	}
 }
 
 @layer components {
