@@ -9,12 +9,39 @@ import {
     ScrollRestoration,
 } from "@remix-run/react";
 import tailwind from "./styles/app.css";
-import { Provider } from "react-redux";
-import store from "./redux/store";
+import { createContext, useState } from "react";
 export const links = () => [
     { rel: "stylesheet", href: cssBundleHref },
     { rel: "stylesheet", href: tailwind },
 ];
+
+export const GlobalContext = createContext({});
+const GlobalProvider = ({ children }) => {
+    const [settings, setSettings] = useState({
+        theme: "light",
+        currentPageTitle: "",
+    });
+    const changeSettings = {
+        toggleTheme: () => {
+            setSettings({
+                ...setSettings,
+                theme: "light" ? "dark" : "light",
+            });
+        },
+        changePageTitle: (title) => {
+            setSettings({
+                ...setSettings,
+                currentPageTitle: title,
+            });
+        },
+    };
+
+    return (
+        <GlobalContext.Provider value={{ settings, changeSettings }}>
+            {children}
+        </GlobalContext.Provider>
+    );
+};
 
 export default function App() {
     return (
@@ -29,9 +56,9 @@ export default function App() {
                 <Links />
             </head>
             <body>
-                <Provider store={store}>
+                <GlobalProvider>
                     <Outlet />
-                </Provider>
+                </GlobalProvider>
                 <ScrollRestoration />
                 <Scripts />
                 <LiveReload />
