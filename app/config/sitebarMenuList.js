@@ -19,37 +19,37 @@ export const sidebarMainMenus = [
     {
         title: "Nhập hàng",
         icon: AddShoppingCartIcon,
-        link: "/home/importproduct",
+        link: "/home/import",
         pemision: "any",
     },
     {
         title: "Xuất hàng",
         icon: DeliveryDiningIcon,
-        link: "/home/exportproduct",
+        link: "/home/export",
         pemision: "any",
     },
     {
         title: "Lịch sử giao dịch",
         icon: ImportExportIcon,
-        link: "/home/history",
+        link: "/home/orders",
         pemision: "any",
     },
     {
         title: "Hàng hóa",
         icon: StoreIcon,
-        link: "/home/productlist",
+        link: "/home/products",
         pemision: "any",
     },
     {
         title: "Nhà cung ứng",
         icon: SupervisorAccountIcon,
-        link: "/home/vendorlist",
+        link: "/home/suppliers",
         pemision: "any",
     },
     {
         title: "Khách hàng",
         icon: AssignmentIndIcon,
-        link: "/home/clientlist",
+        link: "/home/customers",
         pemision: "any",
     },
 ];
@@ -57,7 +57,7 @@ export const sidebarSettingMenus = [
     {
         title: "Nhân sự",
         icon: ManageAccountsIcon,
-        link: "/home/userlist",
+        link: "/home/users",
         pemision: "any",
     },
     {

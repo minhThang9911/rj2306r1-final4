@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-	input[type="file"] {
-		display: none;
-	}
+    textarea:focus,
+    input:focus {
+        outline: none;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
 }
 
 @layer components {

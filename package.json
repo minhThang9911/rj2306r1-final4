@@ -1,45 +1,47 @@
 {
-  "private": true,
-  "sideEffects": false,
-  "scripts": {
-    "build": "remix build",
-    "dev": "remix dev",
-    "start": "remix-serve build",
-    "typecheck": "tsc"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.8",
-    "@mui/icons-material": "^5.14.6",
-    "@mui/material": "^5.14.6",
-    "@mui/x-data-grid": "^6.11.2",
-    "@reduxjs/toolkit": "^1.9.5",
-    "@remix-run/css-bundle": "^1.19.3",
-    "@remix-run/node": "^1.19.3",
-    "@remix-run/react": "^1.19.3",
-    "@remix-run/serve": "^1.19.3",
-    "axios": "^1.4.0",
-    "imgbb-uploader": "^1.5.1",
-    "isbot": "^3.6.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-file-base64": "^1.0.3",
-    "react-redux": "^8.1.2",
-    "redux": "^4.2.1",
-    "uuid": "^9.0.0"
-  },
-  "devDependencies": {
-    "@remix-run/dev": "^1.19.3",
-    "@remix-run/eslint-config": "^1.19.3",
-    "@types/react": "^18.0.35",
-    "@types/react-dom": "^18.0.11",
-    "clsx": "^2.0.0",
-    "eslint": "^8.38.0",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^5.0.4"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  }
+    "private": true,
+    "sideEffects": false,
+    "scripts": {
+        "build": "remix build",
+        "dev": "remix dev",
+        "start": "remix-serve build",
+        "jserver": "json-server --watch ./db/db.json --port 3004",
+        "typecheck": "tsc"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@fontsource/roboto": "^5.0.8",
+        "@mui/icons-material": "^5.14.6",
+        "@mui/material": "^5.14.6",
+        "@mui/x-data-grid": "^6.11.2",
+        "@reduxjs/toolkit": "^1.9.5",
+        "@remix-run/css-bundle": "^1.19.3",
+        "@remix-run/node": "^1.19.3",
+        "@remix-run/react": "^1.19.3",
+        "@remix-run/serve": "^1.19.3",
+        "axios": "^1.4.0",
+        "imgbb-uploader": "^1.5.1",
+        "isbot": "^3.6.8",
+        "json-server": "^0.17.3",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-file-base64": "^1.0.3",
+        "react-redux": "^8.1.2",
+        "redux": "^4.2.1",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@remix-run/dev": "^1.19.3",
+        "@remix-run/eslint-config": "^1.19.3",
+        "@types/react": "^18.0.35",
+        "@types/react-dom": "^18.0.11",
+        "clsx": "^2.0.0",
+        "eslint": "^8.38.0",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.0.4"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
 }

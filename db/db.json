@@ -1,0 +1,126 @@
+{
+    "settings": [
+        {
+            "id": 1,
+            "themeId": 1,
+            "fontId": 1
+        }
+    ],
+    "roles": [
+        {
+            "id": 1,
+            "title": "Admin",
+            "right": 1
+        },
+        {
+            "id": 2,
+            "title": "Sub Admin",
+            "right": 2
+        },
+        {
+            "id": 3,
+            "title": "Quản lý",
+            "right": 3
+        },
+        {
+            "id": 4,
+            "title": "Nhân viên bán hàng",
+            "right": 4
+        }
+    ],
+    "payments": [
+        {
+            "id": 1,
+            "name": "Debit Card"
+        }
+    ],
+
+    "categories": [
+        {
+            "id": 1,
+            "name": "Game"
+        }
+    ],
+
+    "users": [
+        {
+            "id": 1,
+            "settingId": 1,
+            "roleId": 1,
+            "username": "ddddd",
+            "email": "aaa@bbb.ccc",
+            "password": "1234",
+            "fullName": "aaaaaaa",
+            "regDate": "12/10/2023",
+            "country": "arabic",
+            "avatar": "https://banhkemngonghinh.com/wp-content/uploads/2018/04/56-banh-kem-sinh-nhat-tao-hinhf-3d-mat-doremon.jpg",
+            "info": "dsadada",
+            "phone": "02023555",
+            "birthday": "02/05/1995",
+            "address": "dadad wasinton",
+            "lastLogin": "25/11/2023"
+        }
+    ],
+    "suppliers": [
+        {
+            "id": 1,
+            "categoriesId": 1,
+            "name": "aass",
+            "regDate": "22/12/2002",
+            "email": "ddsa@dsds.com",
+            "phone": "023252256",
+            "address": "dsadsadadad"
+        }
+    ],
+    "customers": [
+        {
+            "id": 1,
+            "name": "aaaaaaa",
+            "regDate": "12/10/2023",
+            "email": "aaa@bbb.ccc",
+            "country": "arabic",
+            "avatar": "url",
+            "info": "dsadada",
+            "phone": "02023555",
+            "birthday": "0205/1995",
+            "address": "dadad wasinton"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Oculus VR",
+            "description": "Long contest",
+            "price": 1000,
+            "categoriesId": 1,
+            "images": [
+                "https://banhkemngonghinh.com/wp-content/uploads/2018/04/56-banh-kem-sinh-nhat-tao-hinhf-3d-mat-doremon.jpg"
+            ],
+            "rate": 5
+        }
+    ],
+    "orders": [
+        {
+            "id": 1,
+            "cart": [
+                {
+                    "productId": 1,
+                    "quantity": 4
+                }
+            ],
+            "customerId": 3,
+            "paymentId": 3,
+            "price": 2331,
+            "createdAt": "02/05/2023",
+            "status": "pendding",
+            "comment": "aaaaa"
+        }
+    ],
+    "stocks": [
+        {
+            "id": 1,
+            "productId": 1,
+            "quantity": 2
+        }
+    ]
+}

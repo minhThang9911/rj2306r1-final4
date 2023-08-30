@@ -1,8 +1,9 @@
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { fetcherServer } from "~/server/api.server";
+import { api, fetcherServer, getApiLink } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useContext, useMemo, useState } from "react";
+import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import FileBase64 from "react-file-base64";
@@ -17,14 +18,17 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { api } from "~/config";
 import { v4 } from "uuid";
 import { uploadImg } from "~/server/upload.server";
 import { GlobalContext } from "~/root";
 
 export const loader = async () => {
-    const res = await fetcherServer.get(api.link.users);
-    return json(res.data);
+    const users = await fetcherServer.get(getApiLink.base(api.type.users));
+    const roles = await fetcherServer.get(getApiLink.base(api.type.roles));
+    return json({
+        users: users.data,
+        roles: roles.data,
+    });
 };
 
 export const action = async ({ request }) => {
@@ -38,14 +42,14 @@ export const action = async ({ request }) => {
             return data;
         }
         case "update": {
-            const imgUrl = await uploadImg(
-                data.avatar.replace("data:image/jpeg;base64,", "")
-            );
+            const imgUrl = await uploadImg(data.avatar);
             if (imgUrl !== "error") {
                 data.avatar = imgUrl;
             }
-            await fetcherServer.put(`${api.link.users}/${data.id}`, data);
-
+            await fetcherServer.put(
+                getApiLink.withId(api.type.users, data.id),
+                data
+            );
             return data;
         }
         default: {
@@ -56,7 +60,8 @@ export const action = async ({ request }) => {
 
 function UserListPage() {
     const submit = useSubmit();
-    const rows = useLoaderData();
+    const { users, roles } = useLoaderData();
+    const userRoles = useMemo(() => roles, [roles]);
     const [avatar, setAvatar] = useState("");
     const [openModal, setOpenModal] = useState(false);
     const [seletedUser, setSelectUser] = useState();
@@ -103,10 +108,20 @@ function UserListPage() {
         setAvatar("/img/placeholder-image.jpg");
         setSelectUser({
             id: v4(),
-            avatar: "",
-            name: "",
-            role: "",
+            settingId: 1,
+            roleId: 1,
+            username: "",
             email: "",
+            password: "",
+            fullName: "",
+            regDate: new Date().toISOString(),
+            country: "",
+            avatar: "",
+            info: "",
+            phone: "",
+            birthday: "",
+            address: "",
+            lastLogin: "",
         });
         setOpenModal(true);
     };
@@ -121,14 +136,25 @@ function UserListPage() {
                     return (
                         <img
                             src={param.row.avatar}
-                            alt={param.row.name}
+                            alt={param.row.fullName}
                         />
                     );
                 },
             },
-            { field: "name", headerName: "Tên", flex: 3 },
-            { field: "role", headerName: "Vai trò", flex: 2 },
+            { field: "username", headerName: "Tên đăng nhập", flex: 3 },
+            { field: "fullName", headerName: "Tên", flex: 3 },
             { field: "email", headerName: "Email", flex: 3 },
+            {
+                field: "role",
+                headerName: "Vai trò",
+                flex: 2,
+                valueGetter: (params) => {
+                    return userRoles.find(
+                        (item) => item.id === params.row.roleId
+                    ).title;
+                },
+            },
+
             {
                 field: "actions",
                 type: "actions",
@@ -160,7 +186,7 @@ function UserListPage() {
                 ],
             },
         ],
-        [editUser, submit]
+        [editUser, submit, userRoles]
     );
 
     return (
@@ -184,7 +210,7 @@ function UserListPage() {
                 </Button>
             </div>
             <DataGrid
-                rows={rows}
+                rows={users}
                 columns={columns}
                 autoPageSize
             />
@@ -222,7 +248,29 @@ function UserListPage() {
                                 </div>
                             </div>
                             <div className="w-6/12 flex flex-col h-full p-5">
-                                <div className="flex-grow">
+                                <div className="flex-grow overflow-y-auto">
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Tên đăng nhập"
+                                        value={seletedUser?.username}
+                                        name="username"
+                                        onChange={handleSelectUser}
+                                    />
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Mật khẩu"
+                                        value={seletedUser?.password}
+                                        name="password"
+                                        onChange={handleSelectUser}
+                                    />
                                     <TextField
                                         sx={{
                                             marginBottom: "2em",
@@ -230,8 +278,8 @@ function UserListPage() {
                                         fullWidth
                                         variant="standard"
                                         label="Tên người dùng"
-                                        value={seletedUser?.name}
-                                        name="name"
+                                        value={seletedUser?.fullName}
+                                        name="fullName"
                                         onChange={handleSelectUser}
                                     />
                                     <TextField
@@ -252,24 +300,72 @@ function UserListPage() {
                                         <Select
                                             labelId="user-role-select-label"
                                             id="demo-simple-select"
-                                            value={seletedUser?.role}
+                                            value={seletedUser?.roleId}
                                             label="Vai trò"
                                             name="role"
                                             onChange={handleSelectUser}>
-                                            <MenuItem value={"admin"}>
-                                                Admin
-                                            </MenuItem>
-                                            <MenuItem value={"subAdmin"}>
-                                                Sub Admin
-                                            </MenuItem>
-                                            <MenuItem value={"manager"}>
-                                                Manager
-                                            </MenuItem>
-                                            <MenuItem value={"seller"}>
-                                                Seller
-                                            </MenuItem>
+                                            {userRoles.map((item) => {
+                                                return (
+                                                    <MenuItem
+                                                        value={item.id}
+                                                        key={item.id}>
+                                                        {item.title}
+                                                    </MenuItem>
+                                                );
+                                            })}
                                         </Select>
                                     </FormControl>
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Nước"
+                                        value={seletedUser?.country}
+                                        name="country"
+                                        onChange={handleSelectUser}
+                                    />
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Số điện thoại"
+                                        value={seletedUser?.phone}
+                                        name="phone"
+                                        onChange={handleSelectUser}
+                                    />
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Sinh nhật"
+                                        value={seletedUser?.birthday}
+                                        name="birthday"
+                                        onChange={handleSelectUser}
+                                    />
+                                    <TextField
+                                        sx={{
+                                            marginBottom: "2em",
+                                        }}
+                                        fullWidth
+                                        variant="standard"
+                                        label="Địa chỉ"
+                                        value={seletedUser?.address}
+                                        name="address"
+                                        onChange={handleSelectUser}
+                                    />
+                                    <TextareaAutosize
+                                        className="w-full text-sm font-normal font-sans leading-5 p-3 rounded-xl rounded-br-none shadow-md shadow-slate-100 focus:shadow-outline-purple focus:shadow-lg border border-solid border-slate-300 hover:border-purple-500 focus:border-purple-500 bg-white text-slate-900 focus-visible:outline-0"
+                                        aria-label="Giới thiệu"
+                                        placeholder="Giới thiệu"
+                                        name="info"
+                                        onChange={handleSelectUser}
+                                    />
                                 </div>
                                 <div className="flex-shrink-0 flex justify-around">
                                     <Button
