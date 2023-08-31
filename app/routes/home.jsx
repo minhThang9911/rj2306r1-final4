@@ -5,25 +5,27 @@ import Footer from "../views/layouts/Footer";
 import Sidebar from "../views/layouts/SideBar";
 import { Paper } from "@mui/material";
 function HomePage() {
-	return (
-		<div className="h-screen w-full">
-			<Sidebar>
-				<header className="h-[57px]">
-					<Header />
-				</header>
-				<main className="flex-grow p-2">
-					<Paper elevation={6} className="h-full">
-						<div className="p-2 h-full">
-							<Outlet />
-						</div>
-					</Paper>
-				</main>
-				<footer className="">
-					<Footer />
-				</footer>
-			</Sidebar>
-		</div>
-	);
+    return (
+        <div className="h-screen w-full">
+            <Sidebar>
+                <header className="h-[57px] flex-none">
+                    <Header />
+                </header>
+                <main className="flex-grow p-2 overflow-auto">
+                    <Paper
+                        elevation={6}
+                        className="h-full">
+                        <div className="p-2 h-full overflow-auto">
+                            <Outlet />
+                        </div>
+                    </Paper>
+                </main>
+                <footer className="flex-none">
+                    <Footer />
+                </footer>
+            </Sidebar>
+        </div>
+    );
 }
 
 export default HomePage;

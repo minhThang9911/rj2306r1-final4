@@ -63,6 +63,7 @@ const BodyWraper = styled("div", {
     boxSizing: "border-box",
     flexDirection: "column",
     height: "100vh",
+    overflow: "hidden",
     justifyContent: "space-between",
     ...(open && {
         ...closedMixin(theme, "body"),
