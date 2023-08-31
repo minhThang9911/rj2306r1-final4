@@ -70,7 +70,9 @@
       "fullName": "aaaaaaa",
       "regDate": "12/10/2023",
       "country": "arabic",
-      "avatar": "https://iili.io/HyXs7bR.jpg",
+      "avatar": [
+        "https://iili.io/Hys2ZOv.jpg"
+      ],
       "info": "dsadada",
       "phone": "02023555",
       "birthday": "02/05/1995",
@@ -87,7 +89,9 @@
       "fullName": "fds",
       "regDate": "2023-08-30T12:38:56.633Z",
       "country": "fdsfsd",
-      "avatar": "https://iili.io/HyXs7bR.jpg",
+      "avatar": [
+        "https://iili.io/HyXs7bR.jpg"
+      ],
       "info": "",
       "phone": "42123",
       "birthday": "12/1/12",
@@ -124,7 +128,9 @@
       "regDate": "12/10/2023",
       "email": "aaa@bbb.ccc",
       "country": "arabic",
-      "avatar": "https://banhkemngonghinh.com/wp-content/uploads/2018/04/56-banh-kem-sinh-nhat-tao-hinhf-3d-mat-doremon.jpg",
+      "avatar": [
+        "https://banhkemngonghinh.com/wp-content/uploads/2018/04/56-banh-kem-sinh-nhat-tao-hinhf-3d-mat-doremon.jpg"
+      ],
       "info": "dsadada",
       "phone": "02023555",
       "birthday": "0205/1995",
@@ -135,13 +141,16 @@
     {
       "id": 1,
       "name": "Oculus VR",
-      "description": "Long contest",
+      "description": "hgfhfgh",
       "price": 1000,
       "categoriesId": 1,
       "images": [
-        "https://banhkemngonghinh.com/wp-content/uploads/2018/04/56-banh-kem-sinh-nhat-tao-hinhf-3d-mat-doremon.jpg"
+        "https://iili.io/HysCx1V.jpg",
+        "https://iili.io/HysCAkF.jpg",
+        "https://iili.io/HysunuS.jpg"
       ],
-      "rate": 5
+      "rate": 5,
+      "createAt": "02/01/2023"
     }
   ],
   "orders": [
