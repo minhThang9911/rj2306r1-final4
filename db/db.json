@@ -1,4 +1,14 @@
 {
+  "appinfo": [
+    {
+      "id": 1,
+      "name": "Cửa hàng ABC",
+      "email": "skylight1122@protonmail.com",
+      "address": "dsadas fdaf",
+      "phone": "0214521",
+      "tax": "123132312"
+    }
+  ],
   "settings": [
     {
       "id": 1,
@@ -41,6 +51,11 @@
       "title": "aaa",
       "right": "8",
       "id": 7
+    },
+    {
+      "title": "Kho",
+      "right": "9",
+      "id": 8
     }
   ],
   "payments": [
@@ -51,6 +66,10 @@
     {
       "title": "COD",
       "id": 2
+    },
+    {
+      "title": "Momo",
+      "id": 3
     }
   ],
   "categories": [
