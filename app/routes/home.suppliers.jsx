@@ -50,7 +50,6 @@ export const action = async ({ request }) => {
 			return data;
 		}
 		case "add": {
-			console.log("adding");
 			const { id, ...tmp } = data;
 			await fetcherServer.post(getApiLink.base(api.type.suppliers), tmp);
 			return data;

@@ -53,7 +53,6 @@ export const action = async ({ request }) => {
 				const url = await uploadImg(data.images[i]);
 				if (url !== "error") {
 					uploaded.push(url);
-					console.log(url);
 				} else {
 					uploaded.push(data.images[i]);
 				}

@@ -13,6 +13,8 @@ export const api = {
 		orders: "orders",
 		stocks: "stocks",
 		appinfo: "appinfo",
+		buys: "buys",
+		sells: "sells",
 	},
 };
 

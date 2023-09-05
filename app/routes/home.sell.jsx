@@ -9,13 +9,14 @@ import {
 } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { json } from "@remix-run/node";
-import { useLoaderData, useSubmit } from "@remix-run/react";
-import { useMemo, useState } from "react";
+import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
+import { useEffect, useMemo, useState } from "react";
 import { v4 } from "uuid";
 import { api, getApiLink } from "~/config/api";
 import { fetcherServer } from "~/server/api.server";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sumWithMultiplyFields } from "~/utils/calc";
+import { useSnackbar } from "notistack";
 
 export const loader = async () => {
 	const products = await fetcherServer.get(
@@ -39,6 +40,19 @@ export const loader = async () => {
 	});
 };
 
+export const action = async ({ request }) => {
+	try {
+		const data = await request.json();
+		const res = await fetcherServer.post(
+			getApiLink.base(api.type.sells),
+			data
+		);
+		return { data: res.data };
+	} catch (e) {
+		return { error: "Có lỗi xãy ra!!" };
+	}
+};
+
 const filter = createFilterOptions();
 const inputProductInit = {
 	id: 1,
@@ -47,16 +61,24 @@ const inputProductInit = {
 	price: 0,
 };
 
-export default function ExportProductPage() {
+export default function SellProductPage() {
 	const { productList, customerList } = useLoaderData();
 	const [inputProduct, setInputProduct] = useState(inputProductInit);
-	const [autocustomers, setAutocustomers] = useState({
-		id: 1,
-		name: "",
-		category: "",
-	});
-	const [importList, setimportList] = useState([]);
+	const actionData = useActionData();
+	const { enqueueSnackbar } = useSnackbar();
+	const [autocustomers, setAutocustomers] = useState(customerList[0]);
+	const [exportList, setExportList] = useState([]);
 	const submit = useSubmit();
+
+	useEffect(() => {
+		if (actionData?.data) {
+			enqueueSnackbar("Thêm thành công", { variant: "success" });
+			setExportList([]);
+		}
+		if (actionData?.error) {
+			enqueueSnackbar(actionData.error, { variant: "error" });
+		}
+	}, [actionData, enqueueSnackbar]);
 
 	const columns = useMemo(() => {
 		return [
@@ -95,7 +117,7 @@ export default function ExportProductPage() {
 						icon={<DeleteIcon />}
 						label="Xóa"
 						onClick={() =>
-							setimportList((pre) =>
+							setExportList((pre) =>
 								pre.filter((item) => item.id !== params.row.id)
 							)
 						}
@@ -109,11 +131,21 @@ export default function ExportProductPage() {
 		setInputProduct((pre) => ({ ...pre, [e.target.name]: e.target.value }));
 	};
 	const handleAddProduct = () => {
-		setimportList((pre) => [...pre, inputProduct]);
+		setExportList((pre) => [...pre, inputProduct]);
 		setInputProduct(inputProductInit);
 	};
 	const handSubmit = () => {
-		const data = {};
+		const tmp = exportList.map((item) => ({
+			productsId: item.id,
+			quantity: Number(item.quantity),
+			price: Number(item.price),
+		}));
+		const data = {
+			customersId: autocustomers.id,
+			products: tmp,
+			createAt: new Date().toISOString(),
+		};
+
 		submit(data, {
 			method: "POST",
 			encType: "application/json",
@@ -169,7 +201,9 @@ export default function ExportProductPage() {
 									return option.name;
 								}}
 								renderOption={(props, option) => (
-									<li {...props}>{option.name}</li>
+									<li {...props} key={option.id}>
+										{option.name}
+									</li>
 								)}
 								renderInput={(params) => (
 									<TextField
@@ -213,7 +247,7 @@ export default function ExportProductPage() {
 					<Divider />
 					<div className="h-full">
 						<DataGrid
-							rows={importList}
+							rows={exportList}
 							columns={columns}
 							autoPageSize
 							getRowId={() => v4()}
@@ -226,14 +260,6 @@ export default function ExportProductPage() {
 				<Card className="h-full p-3">
 					<div className="flex flex-col justify-between h-full">
 						<div className="flex-grow">
-							<TextField
-								sx={{ marginBottom: "1em" }}
-								label="Số hóa đơn"
-								name="invoiceNum"
-								fullWidth
-								onFocus={(e) => e.target.select()}
-							/>
-
 							<Autocomplete
 								sx={{ marginBottom: "1em" }}
 								value={autocustomers}
@@ -289,7 +315,7 @@ export default function ExportProductPage() {
 							<Typography>Tiền hàng</Typography>
 							<Typography>
 								Tổng cộng: $
-								{sumWithMultiplyFields(importList, [
+								{sumWithMultiplyFields(exportList, [
 									"quantity",
 									"price",
 								])}

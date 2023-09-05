@@ -51,7 +51,6 @@ export const action = async ({ request }) => {
 			return data;
 		}
 		case "add": {
-			console.log("adding");
 			const imgUrl = await uploadImg(data.avatar[0]);
 			if (imgUrl !== "error") {
 				data.avatar = imgUrl;
