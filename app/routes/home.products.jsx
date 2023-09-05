@@ -231,9 +231,7 @@ export default function ProductListPage() {
 		<div className="h-full flex flex-col justify-start">
 			<div className="mb-2 flex justify-between">
 				<div>
-					<Typography variant="h4" component="h1">
-						Danh mục hàng hóa
-					</Typography>
+					<Typography variant="h4" component="h1"></Typography>
 				</div>
 				<Button
 					sx={{
