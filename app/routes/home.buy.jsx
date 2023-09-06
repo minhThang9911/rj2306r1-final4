@@ -139,7 +139,7 @@ export default function BuyProductPage() {
 			price: Number(item.price),
 		}));
 		const data = {
-			customersId: autoSuppliers.id,
+			suppliersId: autoSuppliers.id,
 			products: tmp,
 			createAt: new Date().toISOString(),
 		};

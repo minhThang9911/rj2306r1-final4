@@ -3628,23 +3628,6 @@
       "updateAt": "2023-09-04T14:14:15.000Z"
     }
   ],
-  "orders": [
-    {
-      "id": 1,
-      "cart": [
-        {
-          "productId": 1,
-          "quantity": 4
-        }
-      ],
-      "customerId": 3,
-      "paymentId": 3,
-      "price": 2331,
-      "createdAt": "02/05/2023",
-      "status": "pendding",
-      "comment": "aaaaa"
-    }
-  ],
   "stocks": [
     {
       "id": 1,
@@ -3654,32 +3637,42 @@
   ],
   "buys": [
     {
-      "customersId": 1,
+      "suppliersId": 1,
       "products": [
         {
-          "productsId": 5,
+          "productsId": 3,
           "quantity": 10,
           "price": 20
         },
         {
           "productsId": 9,
-          "quantity": 11,
-          "price": 2000
-        }
-      ],
-      "createAt": "2023-09-05T14:01:10.647Z",
-      "id": 1
-    },
-    {
-      "customersId": 1,
-      "products": [
+          "quantity": 22,
+          "price": 112
+        },
         {
           "productsId": 4,
-          "quantity": 12,
+          "quantity": 221,
           "price": 221
         }
       ],
-      "createAt": "2023-09-05T14:02:35.128Z",
+      "createAt": "2023-09-06T03:14:21.217Z",
+      "id": 1
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 10,
+          "quantity": 112,
+          "price": 212
+        },
+        {
+          "productsId": 3,
+          "quantity": 21,
+          "price": 221
+        }
+      ],
+      "createAt": "2023-09-06T03:14:40.358Z",
       "id": 2
     }
   ],

@@ -1,42 +1,95 @@
 import { DataGrid } from "@mui/x-data-grid";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import { useMemo } from "react";
+import { Portal } from "@mui/base/Portal";
+import { api } from "~/config/api";
+import { getListWithExpand } from "~/server/api.server";
+import { toVietnameseDateTime } from "~/utils/date";
 
-const columns = [
-	{ field: "id", headerName: "ID", width: 70 },
-	{ field: "firstName", headerName: "First name", width: 130 },
-	{ field: "lastName", headerName: "Last name", width: 130 },
-	{
-		field: "age",
-		headerName: "Age",
-		type: "number",
-		width: 90,
-	},
-	{
-		field: "fullName",
-		headerName: "Full name",
-		description: "This column has a value getter and is not sortable.",
-		sortable: false,
-		width: 160,
-		valueGetter: (params) =>
-			`${params.row.firstName || ""} ${params.row.lastName || ""}`,
-	},
-];
-
-const rows = [
-	{ id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-	{ id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-	{ id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-	{ id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-	{ id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-	{ id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-	{ id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-	{ id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-	{ id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+export const loader = async ({ request }) => {
+	const buys = await getListWithExpand(api.type.buys, api.type.suppliers);
+	const sells = await getListWithExpand(api.type.sells, api.type.customers);
+	return {
+		buyList: buys,
+		sellList: sells,
+	};
+};
 
 export default function HistoryPage() {
+	const { buyList, sellList } = useLoaderData();
+	const historyList = useMemo(() => {
+		const b = [...buyList];
+		b.forEach((item) => {
+			if (!item.id.toString().includes("b")) {
+				item.id = item.id + "b";
+			}
+		});
+		const s = [...sellList];
+		s.forEach((item) => {
+			if (!item.id.toString().includes("s")) {
+				item.id = item.id + "s";
+			}
+		});
+		const r = [...b, ...s];
+		r.sort((x, y) =>
+			x.createAt < y.createAt ? -1 : x.createAt > y.createAt ? 1 : 0
+		);
+
+		return r;
+	}, [buyList, sellList]);
+	const columns = useMemo(() => {
+		return [
+			{ field: "id", headerName: "ID", flex: 1 },
+			{
+				field: "partner",
+				headerName: "Đối tác",
+				flex: 2,
+				valueGetter: (params) => {
+					if (params.row?.customers) {
+						return params.row?.customers.name;
+					}
+					if (params.row?.suppliers) {
+						return params.row.suppliers.name;
+					}
+					return "";
+				},
+			},
+			{
+				field: "itemCount",
+				headerName: "Số lượng hàng",
+				flex: 2,
+				valueGetter: (params) => {
+					if (params.row?.products) {
+						return params.row.products.length;
+					}
+					return "";
+				},
+			},
+
+			{
+				field: "time",
+				headerName: "Thời gian",
+				flex: 2,
+				valueGetter: (params) => {
+					const d = new Date(params.row.createAt);
+					return toVietnameseDateTime(d);
+				},
+			},
+
+			{
+				field: "type",
+				headerName: "Giao dịch",
+				flex: 2,
+				valueGetter: (params) => {
+					return params.row.id.includes("b") ? "Mua" : "Bán";
+				},
+			},
+		];
+	}, []);
 	return (
 		<div style={{ height: "100%", width: "100%" }}>
-			<DataGrid rows={rows} columns={columns} checkboxSelection />
+			<DataGrid rows={historyList} columns={columns} autoPageSize />
+			<Outlet />
 		</div>
 	);
 }
