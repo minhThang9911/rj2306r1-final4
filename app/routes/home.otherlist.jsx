@@ -2,20 +2,16 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import SettingFormCard from "~/components/SettingFormCard";
 import { api, getApiLink } from "~/config/api";
-import { fetcherServer } from "~/server/api.server";
+import { getData, postData } from "~/server/api.server";
 
 export async function loader({ request }) {
-	const roles = await fetcherServer.get(getApiLink.base(api.type.roles));
-	const payments = await fetcherServer.get(
-		getApiLink.base(api.type.payments)
-	);
-	const categories = await fetcherServer.get(
-		getApiLink.base(api.type.categories)
-	);
+	const roles = await getData(getApiLink.base(api.type.roles));
+	const payments = await getData(getApiLink.base(api.type.payments));
+	const categories = await getData(getApiLink.base(api.type.categories));
 	return json({
-		roles: roles.data,
-		payments: payments.data,
-		categories: categories.data,
+		roles,
+		payments,
+		categories,
 	});
 }
 
@@ -23,8 +19,7 @@ export async function action({ request }) {
 	const { _action, _apiLink, id, ...data } = await request.json();
 	switch (_action) {
 		case "add": {
-			await fetcherServer.post(_apiLink, data);
-			return data;
+			return await postData(_apiLink, data);
 		}
 		default: {
 			return data;

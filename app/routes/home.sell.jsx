@@ -13,24 +13,22 @@ import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { v4 } from "uuid";
 import { api, getApiLink } from "~/config/api";
-import { fetcherServer } from "~/server/api.server";
+import { getData, postData } from "~/server/api.server";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sumWithMultiplyFields } from "~/utils/calc";
 import { useSnackbar } from "notistack";
 
 export const loader = async () => {
-	const products = await fetcherServer.get(
+	const products = await getData(
 		getApiLink.expand(api.type.products, api.type.categories)
 	);
-	const productsData = products.data.map((item) => ({
+	const productsData = products.map((item) => ({
 		id: item.id,
 		name: item.name,
 		category: item.categories.title,
 	}));
-	const customers = await fetcherServer.get(
-		getApiLink.base(api.type.customers)
-	);
-	const customersData = customers.data.map((item) => ({
+	const customers = await getData(getApiLink.base(api.type.customers));
+	const customersData = customers.map((item) => ({
 		id: item.id,
 		name: item.name,
 	}));
@@ -43,11 +41,8 @@ export const loader = async () => {
 export const action = async ({ request }) => {
 	try {
 		const data = await request.json();
-		const res = await fetcherServer.post(
-			getApiLink.base(api.type.sells),
-			data
-		);
-		return { data: res.data };
+		const res = await postData(getApiLink.base(api.type.sells), data);
+		return { data: res };
 	} catch (e) {
 		return { error: "Có lỗi xãy ra!!" };
 	}

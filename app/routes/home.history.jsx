@@ -1,14 +1,17 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { useMemo } from "react";
-import { Portal } from "@mui/base/Portal";
-import { api } from "~/config/api";
-import { getListWithExpand } from "~/server/api.server";
+import { api, getApiLink } from "~/config/api";
+import { getData } from "~/server/api.server";
 import { toVietnameseDateTime } from "~/utils/date";
 
 export const loader = async ({ request }) => {
-	const buys = await getListWithExpand(api.type.buys, api.type.suppliers);
-	const sells = await getListWithExpand(api.type.sells, api.type.customers);
+	const buys = await getData(
+		getApiLink.expand(api.type.buys, api.type.suppliers)
+	);
+	const sells = await getData(
+		getApiLink.expand(api.type.sells, api.type.customers)
+	);
 	return {
 		buyList: buys,
 		sellList: sells,

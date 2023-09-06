@@ -3,19 +3,18 @@ import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { api, getApiLink } from "~/config/api";
-import { fetcherServer } from "~/server/api.server";
+import { editData, getData } from "~/server/api.server";
 
 export async function loader({ request }) {
-	const appInfo = await fetcherServer.get(getApiLink.base(api.type.appinfo));
+	const appInfo = await getData(getApiLink.base(api.type.appinfo));
 
-	return json(appInfo.data[0]);
+	return json(appInfo[0]);
 }
 
 export async function action({ request }) {
 	const formData = await request.formData();
 	const data = Object.fromEntries(formData);
-	await fetcherServer.put(getApiLink.withId(api.type.appinfo, 1), data);
-	return data;
+	return await editData(getApiLink.withId(api.type.appinfo, 1), data);
 }
 
 function SettingPage() {

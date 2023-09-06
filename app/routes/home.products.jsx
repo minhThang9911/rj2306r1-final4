@@ -1,5 +1,5 @@
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { fetcherServer } from "~/server/api.server";
+import { deleteData, editData, getData, postData } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useContext, useMemo, useState } from "react";
@@ -25,15 +25,11 @@ import Img from "~/components/Img";
 import { defaultImgSrc } from "~/config";
 
 export const loader = async () => {
-	const products = await fetcherServer.get(
-		getApiLink.base(api.type.products)
-	);
-	const categories = await fetcherServer.get(
-		getApiLink.base(api.type.categories)
-	);
+	const products = await getData(getApiLink.base(api.type.products));
+	const categories = await getData(getApiLink.base(api.type.categories));
 	return json({
-		products: products.data,
-		categories: categories.data,
+		products: products,
+		categories: categories,
 	});
 };
 
@@ -41,8 +37,9 @@ export const action = async ({ request }) => {
 	const { _action, ...data } = await request.json();
 	switch (_action) {
 		case "delete": {
-			await fetcherServer.delete(`${api.link.products}/${data.id}`);
-			return data;
+			return await deleteData(
+				getApiLink.withId(api.type.products, data.id)
+			);
 		}
 		case "update": {
 			const uploaded = [];
@@ -58,14 +55,13 @@ export const action = async ({ request }) => {
 				}
 			}
 
-			await fetcherServer.put(
+			return await editData(
 				getApiLink.withId(api.type.products, data.id),
 				{
 					...data,
 					images: uploaded,
 				}
 			);
-			return data;
 		}
 		case "add": {
 			const uploaded = [];
@@ -81,8 +77,7 @@ export const action = async ({ request }) => {
 			});
 			const { id, ...tmp } = data;
 			tmp.images = uploaded;
-			await fetcherServer.post(getApiLink.base(api.type.products), tmp);
-			return data;
+			return await postData(getApiLink.base(api.type.products), tmp);
 		}
 		default: {
 			return data;

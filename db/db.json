@@ -166,93 +166,17 @@
       "lastLogin": "25/11/2023"
     },
     {
-      "id": 4,
-      "settingId": 1,
-      "roleId": 1,
-      "username": "kharis",
-      "email": "kharis1@mail.com",
-      "password": "123456",
-      "fullName": "kharis",
-      "regDate": "2023-09-04T03:09:40.000Z",
-      "country": "arabic",
-      "avatar": [
-        "https://api.lorem.space/image/face?w=640&h=480"
-      ],
-      "info": "dsadada",
-      "phone": "02023555",
-      "birthday": "02/05/1995",
-      "address": "dadad wasinton",
-      "lastLogin": "25/11/2023"
-    },
-    {
-      "id": 5,
-      "settingId": 1,
-      "roleId": 1,
-      "username": "deivy",
-      "email": "deovu@gmail.com",
-      "password": "132Ad",
-      "fullName": "deivy",
-      "regDate": "2023-09-04T04:43:23.000Z",
-      "country": "arabic",
-      "avatar": [
-        "https://api.lorem.space/image/face?w=640&h=480&r=867"
-      ],
-      "info": "dsadada",
-      "phone": "02023555",
-      "birthday": "02/05/1995",
-      "address": "dadad wasinton",
-      "lastLogin": "25/11/2023"
-    },
-    {
-      "id": 6,
-      "settingId": 1,
-      "roleId": 1,
-      "username": "patel",
-      "email": "patel@gmail.com",
-      "password": "p12345",
-      "fullName": "patel",
-      "regDate": "2023-09-04T04:54:47.000Z",
-      "country": "arabic",
-      "avatar": [
-        "https://api.lorem.space/image/face?w=640&h=480&r=867"
-      ],
-      "info": "dsadada",
-      "phone": "02023555",
-      "birthday": "02/05/1995",
-      "address": "dadad wasinton",
-      "lastLogin": "25/11/2023"
-    },
-    {
-      "id": 7,
-      "settingId": 1,
-      "roleId": 1,
-      "username": "testing ",
-      "email": "testing@gmail.com",
-      "password": "12345me",
-      "fullName": "testing ",
-      "regDate": "2023-09-04T05:00:20.000Z",
-      "country": "arabic",
-      "avatar": [
-        "https://api.escuelajs.co/api/v1/files/2e4b.png"
-      ],
-      "info": "dsadada",
-      "phone": "02023555",
-      "birthday": "02/05/1995",
-      "address": "dadad wasinton",
-      "lastLogin": "25/11/2023"
-    },
-    {
       "id": 8,
       "settingId": 1,
       "roleId": 1,
-      "username": "Nicolas",
+      "username": "Nicolashhh",
       "email": "john@mail.com",
       "password": "1234",
       "fullName": "Nicolas",
       "regDate": "2023-09-04T05:56:29.000Z",
       "country": "arabic",
       "avatar": [
-        "https://api.lorem.space/image/face?w=640&h=480"
+        "https://iili.io/J9YqnVe.jpg"
       ],
       "info": "dsadada",
       "phone": "02023555",
@@ -584,25 +508,6 @@
       "lastLogin": "25/11/2023"
     },
     {
-      "id": 26,
-      "settingId": 1,
-      "roleId": 1,
-      "username": "نننن",
-      "email": "abdoo@gmail.com",
-      "password": "1234",
-      "fullName": "نننن",
-      "regDate": "2023-09-04T12:17:17.000Z",
-      "country": "arabic",
-      "avatar": [
-        "https://api.lorem.space/image/face?w=640&h=480&r=867"
-      ],
-      "info": "dsadada",
-      "phone": "02023555",
-      "birthday": "02/05/1995",
-      "address": "dadad wasinton",
-      "lastLogin": "25/11/2023"
-    },
-    {
       "id": 40,
       "settingId": 1,
       "roleId": 1,
@@ -620,6 +525,25 @@
       "birthday": "02/05/1995",
       "address": "dadad wasinton",
       "lastLogin": "25/11/2023"
+    },
+    {
+      "settingId": 1,
+      "roleId": 2,
+      "username": "gggg",
+      "email": "",
+      "password": "4242",
+      "fullName": "gggfd",
+      "regDate": "2023-09-06T16:05:53.160Z",
+      "country": "hh",
+      "avatar": [
+        "https://iili.io/J9YqIlj.jpg"
+      ],
+      "info": "",
+      "phone": "011212",
+      "birthday": "",
+      "address": "",
+      "lastLogin": "",
+      "id": 41
     }
   ],
   "suppliers": [

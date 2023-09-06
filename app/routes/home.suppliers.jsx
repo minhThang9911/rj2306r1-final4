@@ -1,5 +1,5 @@
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { fetcherServer } from "~/server/api.server";
+import { deleteData, editData, getData, postData } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useContext, useMemo, useState } from "react";
@@ -21,15 +21,12 @@ import { GlobalContext } from "~/root";
 import { api, getApiLink } from "~/config/api";
 
 export const loader = async () => {
-	const suppliers = await fetcherServer.get(
-		getApiLink.base(api.type.suppliers)
-	);
-	const categories = await fetcherServer.get(
-		getApiLink.base(api.type.categories)
-	);
+	const suppliers = await getData(getApiLink.base(api.type.suppliers));
+
+	const categories = await getData(getApiLink.base(api.type.categories));
 	return json({
-		suppliers: suppliers.data,
-		categories: categories.data,
+		suppliers,
+		categories,
 	});
 };
 
@@ -37,22 +34,19 @@ export const action = async ({ request }) => {
 	const { _action, ...data } = await request.json();
 	switch (_action) {
 		case "delete": {
-			await fetcherServer.delete(
+			return await deleteData(
 				getApiLink.withId(api.type.suppliers, data.id)
 			);
-			return data;
 		}
 		case "update": {
-			await fetcherServer.put(
+			return await editData(
 				getApiLink.withId(api.type.suppliers, data.id),
 				data
 			);
-			return data;
 		}
 		case "add": {
 			const { id, ...tmp } = data;
-			await fetcherServer.post(getApiLink.base(api.type.suppliers), tmp);
-			return data;
+			return await postData(getApiLink.base(api.type.suppliers), tmp);
 		}
 		default: {
 			return data;
