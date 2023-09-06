@@ -656,6 +656,18 @@
       "phone": "02023555",
       "birthday": "0205/1995",
       "address": "dadad wasinton"
+    },
+    {
+      "name": "nguyễn hữu cầm",
+      "email": "nguyenhuucam91@gmail.com",
+      "country": "Viet Nam",
+      "avatar": "https://iili.io/J9YILuf.jpg",
+      "info": "Giới thiệu",
+      "phone": "0348921193",
+      "birthday": "1/1/1991",
+      "address": "Đại học Hà Nội",
+      "regDate": "2023-09-06T12:44:57.805Z",
+      "id": 2
     }
   ],
   "products": [
@@ -1208,7 +1220,8 @@
       "images": [
         "https://picsum.photos/640/640?r=1544",
         "https://picsum.photos/640/640?r=7324",
-        "https://picsum.photos/640/640?r=2856"
+        "https://picsum.photos/640/640?r=2856",
+        "https://iili.io/J9YqnVe.jpg"
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
@@ -1238,7 +1251,8 @@
       "images": [
         "https://picsum.photos/640/640?r=4105",
         "https://picsum.photos/640/640?r=4901",
-        "https://picsum.photos/640/640?r=7951"
+        "https://picsum.photos/640/640?r=7951",
+        "https://iili.io/J9YqIlj.jpg"
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
@@ -3674,6 +3688,23 @@
       ],
       "createAt": "2023-09-06T03:14:40.358Z",
       "id": 2
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 3,
+          "quantity": 100,
+          "price": 2000
+        },
+        {
+          "productsId": 6,
+          "quantity": 33,
+          "price": 25
+        }
+      ],
+      "createAt": "2023-09-06T12:41:21.280Z",
+      "id": 3
     }
   ],
   "sells": [

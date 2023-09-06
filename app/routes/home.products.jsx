@@ -262,9 +262,7 @@ export default function ProductListPage() {
 													images={images}
 													src={item}
 													setImages={setImages}
-													alt={
-														seletedProductBackup.name
-													}
+													alt={seletedProduct.name}
 												/>
 											);
 										})}
@@ -291,7 +289,7 @@ export default function ProductListPage() {
 										</InputLabel>
 										<Select
 											labelId="product-categories-select-label"
-											value={seletedProduct?.roleId}
+											value={seletedProduct?.categoriesId}
 											label="Danh mục"
 											name="categoriesId"
 											onChange={handleSelectProduct}>
