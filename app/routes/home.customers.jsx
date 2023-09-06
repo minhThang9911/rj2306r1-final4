@@ -1,4 +1,4 @@
-import { useLoaderData, useSubmit } from "@remix-run/react";
+import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { fetcherServer } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
@@ -6,12 +6,12 @@ import { useCallback, useContext, useMemo, useState } from "react";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import FileBase64 from "react-file-base64";
 import { Button, Fade, Modal, TextField, Typography } from "@mui/material";
 import { v4 } from "uuid";
 import { uploadImg } from "~/server/upload.server";
 import { GlobalContext } from "~/root";
 import { api, getApiLink } from "~/config/api";
+import Img from "~/components/Img";
 
 export const loader = async () => {
 	const customers = await fetcherServer.get(
@@ -24,13 +24,15 @@ export const action = async ({ request }) => {
 	const { _action, ...data } = await request.json();
 	switch (_action) {
 		case "delete": {
-			await fetcherServer.delete(`${api.link.customers}/${data.id}`);
+			await fetcherServer.delete(
+				getApiLink.withId(api.type.customers, data.id)
+			);
 			return data;
 		}
 		case "update": {
-			const imgUrl = await uploadImg(data.avatar);
+			const imgUrl = await uploadImg(data.avatar[0]);
 			if (imgUrl !== "error") {
-				data.avatar = imgUrl;
+				data.avatar[0] = imgUrl;
 			}
 			await fetcherServer.put(
 				getApiLink.withId(api.type.customers, data.id),
@@ -39,13 +41,16 @@ export const action = async ({ request }) => {
 			return data;
 		}
 		case "add": {
-			const imgUrl = await uploadImg(data.avatar);
+			const imgUrl = await uploadImg(data.avatar[0]);
 			if (imgUrl !== "error") {
-				data.avatar = imgUrl;
+				data.avatar[0] = imgUrl;
 			}
 			const { id, ...tmp } = data;
-			await fetcherServer.post(getApiLink.base(api.type.customers), tmp);
-			return data;
+			const d = await fetcherServer.post(
+				getApiLink.base(api.type.customers),
+				tmp
+			);
+			return d.data;
 		}
 		default: {
 			return data;
@@ -56,11 +61,13 @@ export const action = async ({ request }) => {
 function CustomerListPage() {
 	const submit = useSubmit();
 	const customers = useLoaderData();
-	const [avatar, setAvatar] = useState("");
+	const [avatar, setAvatar] = useState([]);
 	const [openModal, setOpenModal] = useState(false);
 	const [seletedCustomer, setSelectCustomer] = useState();
 	const [seletedCustomerBackup, setSelectCustomerBackup] = useState();
 	const [isNew, setIsNew] = useState(false);
+	const aaa = useActionData();
+	console.log("post data", aaa);
 	const { settings } = useContext(GlobalContext);
 	const editCustomer = useCallback(
 		(customer) => () => {
@@ -103,7 +110,7 @@ function CustomerListPage() {
 
 	const handleNew = () => {
 		setIsNew(true);
-		setAvatar("/img/placeholder-image.jpg");
+		setAvatar(["/img/placeholder-image.jpg"]);
 		setSelectCustomer({
 			id: v4(),
 			name: "",
@@ -194,31 +201,16 @@ function CustomerListPage() {
 				<Fade in={openModal}>
 					<div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white w-10/12 h-5/6 rounded-xl p-3">
 						<div className="flex justify-between h-full">
-							<div className="w-6/12 flex flex-col h-full p-5">
-								<div className="flex-grow relative">
-									<img
-										className="block w-full rounded-3xl absolute top-[50%] translate-y-[-50%]"
-										src={avatar}
-										alt={seletedCustomer?.name}
-									/>
-								</div>
-								<div className="flex-shrink-0 text-center">
-									<Button
-										component="label"
-										tabIndex={-1}
-										variant="outlined"
-										color="info">
-										Đổi Avartar
-										<FileBase64
-											multiple={false}
-											onDone={({ base64 }) => {
-												setAvatar(base64);
-											}}
-											onChange={(e) => e.target.files[0]}
-										/>
-									</Button>
-								</div>
+							<div className="w-6/12 flex flex-col h-full p-5 justify-center">
+								<Img
+									images={avatar}
+									index={0}
+									src={avatar[0]}
+									setImages={setAvatar}
+									alt={seletedCustomer?.name}
+								/>
 							</div>
+
 							<div className="w-6/12 flex flex-col h-full p-5">
 								<div className="flex-grow overflow-y-auto">
 									<TextField

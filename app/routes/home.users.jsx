@@ -53,7 +53,7 @@ export const action = async ({ request }) => {
 		case "add": {
 			const imgUrl = await uploadImg(data.avatar[0]);
 			if (imgUrl !== "error") {
-				data.avatar = imgUrl;
+				data.avatar[0] = imgUrl;
 			}
 			const { id, ...tmp } = data;
 			await fetcherServer.post(getApiLink.base(api.type.users), tmp);
@@ -117,7 +117,7 @@ function UserListPage() {
 
 	const handleNew = () => {
 		setIsNew(true);
-		setAvatar("/img/placeholder-image.jpg");
+		setAvatar(["/img/placeholder-image.jpg"]);
 		setSelectUser({
 			id: v4(),
 			settingId: 1,

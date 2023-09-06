@@ -661,7 +661,9 @@
       "name": "nguyễn hữu cầm",
       "email": "nguyenhuucam91@gmail.com",
       "country": "Viet Nam",
-      "avatar": "https://iili.io/J9YILuf.jpg",
+      "avatar": [
+        "https://iili.io/J9YILuf.jpg"
+      ],
       "info": "Giới thiệu",
       "phone": "0348921193",
       "birthday": "1/1/1991",
