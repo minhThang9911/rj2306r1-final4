@@ -15,7 +15,7 @@ import Img from "~/components/Img";
 
 export const loader = async () => {
 	const customers = await getData(getApiLink.base(api.type.customers));
-	return json(customers.data);
+	return json(customers);
 };
 
 export const action = async ({ request }) => {
