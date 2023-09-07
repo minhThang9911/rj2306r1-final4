@@ -2,7 +2,7 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import SettingFormCard from "~/components/SettingFormCard";
 import { api, getApiLink } from "~/config/api";
-import { getData, postData } from "~/server/api.server";
+import { deleteData, getData, postData } from "~/server/api.server";
 
 export async function loader({ request }) {
 	const roles = await getData(getApiLink.base(api.type.roles));
@@ -16,10 +16,13 @@ export async function loader({ request }) {
 }
 
 export async function action({ request }) {
-	const { _action, _apiLink, id, ...data } = await request.json();
+	const { _action, _apiType, id, ...data } = await request.json();
 	switch (_action) {
 		case "add": {
-			return await postData(_apiLink, data);
+			return await postData(getApiLink.base(_apiType), data);
+		}
+		case "delete": {
+			return await deleteData(getApiLink.withId(_apiType, id));
 		}
 		default: {
 			return data;
@@ -56,18 +59,18 @@ export default function OtherListPage() {
 	return (
 		<div className="flex justify-between flex-wrap">
 			<div className="w-4/12 p-2">
-				<SettingFormCard
+				{/* <SettingFormCard
 					columns={columnRoles}
 					items={roles}
 					apiLink={getApiLink.base(api.type.roles)}
 					settingTitle="Vai Trò"
-				/>
+				/> */}
 			</div>
 			<div className="w-4/12 p-2">
 				<SettingFormCard
 					columns={columnPayments}
 					items={payments}
-					apiLink={getApiLink.base(api.type.payments)}
+					apiType={api.type.payments}
 					settingTitle="Phương thức thanh toán"
 				/>
 			</div>
@@ -75,7 +78,7 @@ export default function OtherListPage() {
 				<SettingFormCard
 					columns={columncategorie}
 					items={categories}
-					apiLink={getApiLink.base(api.type.categories)}
+					apiType={api.type.categories}
 					settingTitle="Danh mục hàng"
 				/>
 			</div>

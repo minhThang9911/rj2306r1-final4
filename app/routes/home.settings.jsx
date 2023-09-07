@@ -83,9 +83,11 @@ function SettingPage() {
 				onChange={handleChange}
 				name="tax"
 			/>
-			<Button variant="contained" color="success" type="submit">
-				Lưu thông tin
-			</Button>
+			<div className="text-end">
+				<Button variant="contained" color="success" type="submit">
+					Lưu thông tin
+				</Button>
+			</div>
 		</Form>
 	);
 }

@@ -98,13 +98,6 @@
       "image": "https://picsum.photos/640/640?r=8117",
       "createAt": "2023-09-04T14:22:43.000Z",
       "updateAt": "2023-09-04T14:22:43.000Z"
-    },
-    {
-      "id": 10,
-      "title": "Cremass",
-      "image": "https://picsum.photos/640/640?r=8117",
-      "createAt": "2023-09-04T14:23:18.000Z",
-      "updateAt": "2023-09-04T14:23:18.000Z"
     }
   ],
   "users": [
@@ -588,7 +581,7 @@
       "avatar": [
         "https://iili.io/J9YILuf.jpg"
       ],
-      "info": "Giới thiệu",
+      "info": "Giới thiệuhgf\nlkj\nlkj",
       "phone": "0348921193",
       "birthday": "1/1/1991",
       "address": "Đại học Hà Nội",
@@ -3631,6 +3624,35 @@
       ],
       "createAt": "2023-09-06T12:41:21.280Z",
       "id": 3
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 1,
+          "quantity": 10000,
+          "price": 200
+        }
+      ],
+      "createAt": "2023-09-07T13:41:52.676Z",
+      "id": 4
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 5,
+          "quantity": 2000,
+          "price": 100
+        },
+        {
+          "productsId": 6,
+          "quantity": 220,
+          "price": 2000
+        }
+      ],
+      "createAt": "2023-09-07T13:53:41.873Z",
+      "id": 5
     }
   ],
   "sells": [
@@ -3674,6 +3696,18 @@
       ],
       "createAt": "2023-09-05T13:46:52.337Z",
       "id": 3
+    },
+    {
+      "customersId": 1,
+      "products": [
+        {
+          "productsId": 3,
+          "quantity": 100,
+          "price": 20
+        }
+      ],
+      "createAt": "2023-09-07T14:28:21.565Z",
+      "id": 4
     }
   ]
 }

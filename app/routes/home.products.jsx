@@ -1,9 +1,14 @@
 import { useLoaderData, useSubmit } from "@remix-run/react";
-import { deleteData, editData, getData, postData } from "~/server/api.server";
+import {
+	deleteData,
+	editData,
+	getData,
+	getProductWithStock,
+	postData,
+} from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useContext, useMemo, useState } from "react";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -23,9 +28,10 @@ import { GlobalContext } from "~/root";
 import { api, getApiLink } from "~/config/api";
 import Img from "~/components/Img";
 import { defaultImgSrc } from "~/config";
+import { formatPrice } from "~/utils/string";
 
 export const loader = async () => {
-	const products = await getData(getApiLink.base(api.type.products));
+	const products = await getProductWithStock();
 	const categories = await getData(getApiLink.base(api.type.categories));
 	return json({
 		products: products,
@@ -145,9 +151,9 @@ export default function ProductListPage() {
 		setImages(["/img/placeholder-image.jpg"]);
 		setSelectProduct({
 			id: v4(),
-			name: "Oculus VR",
-			description: "Long contest",
-			price: 1000,
+			name: "",
+			description: "",
+			price: 0,
 			categoriesId: 1,
 			images: [
 				"/img/placeholder-image.jpg",
@@ -169,7 +175,12 @@ export default function ProductListPage() {
 				flex: 1,
 				renderCell: (param) => {
 					return (
-						<img src={param.row.images[0]} alt={param.row.name} />
+						<img
+							className="cursor-pointer"
+							src={param.row.images[0]}
+							alt={param.row.name}
+							onClick={editProduct(param.row)}
+						/>
 					);
 				},
 			},
@@ -184,8 +195,20 @@ export default function ProductListPage() {
 					).title;
 				},
 			},
-			{ field: "price", headerName: "Giá", flex: 3 },
-			{ field: "rate", headerName: "Đánh giá", flex: 3 },
+			{
+				field: "price",
+				headerName: "Giá",
+				flex: 3,
+				type: "number",
+				valueFormatter: (params) => {
+					if (params.value == null) {
+						return "";
+					}
+					return formatPrice(params.value);
+				},
+			},
+			{ field: "stock", headerName: "Tồn kho", flex: 1, type: "number" },
+			{ field: "rate", headerName: "Đánh giá", flex: 3, type: "number" },
 
 			{
 				field: "actions",
@@ -278,7 +301,11 @@ export default function ProductListPage() {
 										onChange={handleSelectProduct}
 									/>
 
-									<FormControl fullWidth>
+									<FormControl
+										fullWidth
+										sx={{
+											marginBottom: "2em",
+										}}>
 										<InputLabel id="product-categories-select-label">
 											Danh mục
 										</InputLabel>
@@ -306,17 +333,22 @@ export default function ProductListPage() {
 										}}
 										fullWidth
 										variant="standard"
-										label="Giắ"
+										label="Giá"
 										value={seletedProduct?.price}
 										name="price"
 										onChange={handleSelectProduct}
 									/>
-									<TextareaAutosize
-										className="w-full text-sm font-normal font-sans leading-5 p-3 rounded-xl rounded-br-none shadow-md shadow-slate-100 focus:shadow-outline-purple focus:shadow-lg border border-solid border-slate-300 hover:border-purple-500 focus:border-purple-500 bg-white text-slate-900 focus-visible:outline-0"
-										aria-label="Giới thiệu"
-										placeholder="Giới thiệu"
+									<TextField
+										sx={{
+											marginBottom: "2em",
+										}}
+										fullWidth
+										variant="standard"
+										label="Giới thiệu"
+										value={seletedProduct?.description}
 										name="description"
 										onChange={handleSelectProduct}
+										multiline
 									/>
 								</div>
 								<div className="flex-shrink-0 flex justify-around">

@@ -126,7 +126,12 @@ function CustomerListPage() {
 				flex: 1,
 				renderCell: (param) => {
 					return (
-						<img src={param.row.avatar} alt={param.row.fullName} />
+						<img
+							src={param.row.avatar}
+							alt={param.row.fullName}
+							className="cursor-pointer"
+							onClick={editCustomer(param.row)}
+						/>
 					);
 				},
 			},
@@ -271,13 +276,17 @@ function CustomerListPage() {
 										name="address"
 										onChange={handleSelectCustomer}
 									/>
-
-									<TextareaAutosize
-										className="w-full text-sm font-normal font-sans leading-5 p-3 rounded-xl rounded-br-none shadow-md shadow-slate-100 focus:shadow-outline-purple focus:shadow-lg border border-solid border-slate-300 hover:border-purple-500 focus:border-purple-500 bg-white text-slate-900 focus-visible:outline-0"
-										aria-label="Giới thiệu"
-										placeholder="Giới thiệu"
+									<TextField
+										sx={{
+											marginBottom: "2em",
+										}}
+										fullWidth
+										variant="standard"
+										label="Giới thiệu"
+										value={seletedCustomer?.info}
 										name="info"
 										onChange={handleSelectCustomer}
+										multiline
 									/>
 								</div>
 								<div className="flex-shrink-0 flex justify-around">

@@ -61,6 +61,7 @@ export default function HistoryPage() {
 				field: "itemCount",
 				headerName: "Số lượng hàng",
 				flex: 2,
+				type: "number",
 				valueGetter: (params) => {
 					if (params.row?.products) {
 						return params.row.products.length;

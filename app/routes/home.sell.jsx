@@ -13,27 +13,20 @@ import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { v4 } from "uuid";
 import { api, getApiLink } from "~/config/api";
-import { getData, postData } from "~/server/api.server";
+import { getData, getProductWithStock, postData } from "~/server/api.server";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sumWithMultiplyFields } from "~/utils/calc";
 import { useSnackbar } from "notistack";
 
 export const loader = async () => {
-	const products = await getData(
-		getApiLink.expand(api.type.products, api.type.categories)
-	);
-	const productsData = products.map((item) => ({
-		id: item.id,
-		name: item.name,
-		category: item.categories.title,
-	}));
+	const products = await getProductWithStock();
 	const customers = await getData(getApiLink.base(api.type.customers));
 	const customersData = customers.map((item) => ({
 		id: item.id,
 		name: item.name,
 	}));
 	return json({
-		productList: productsData,
+		productList: products,
 		customerList: customersData,
 	});
 };
@@ -63,6 +56,7 @@ export default function SellProductPage() {
 	const { enqueueSnackbar } = useSnackbar();
 	const [autocustomers, setAutocustomers] = useState(customerList[0]);
 	const [exportList, setExportList] = useState([]);
+	const [stock, setStock] = useState(0);
 	const submit = useSubmit();
 
 	useEffect(() => {
@@ -161,6 +155,7 @@ export default function SellProductPage() {
 											id: newValue.id,
 											name: newValue.name,
 										});
+										setStock(newValue.stock);
 									}
 								}}
 								filterOptions={(options, params) => {
@@ -208,13 +203,37 @@ export default function SellProductPage() {
 								)}
 							/>
 						</div>
+						<div className="w-1/12">
+							<TextField
+								name="quantity"
+								label="Tồn kho"
+								disabled
+								fullWidth
+								value={stock}
+								onChange={handleAddProductChange}
+								onFocus={(e) => e.target.select()}
+							/>
+						</div>
 						<div className="w-2/12">
 							<TextField
 								name="quantity"
-								label="Số lượng"
+								label="Số lượng xuất"
 								fullWidth
 								value={inputProduct?.quantity}
-								onChange={handleAddProductChange}
+								onChange={(e) => {
+									const v = e.target.value;
+									if (!isNaN(v)) {
+										const n = Number(v);
+										if (n <= stock) {
+											handleAddProductChange(e);
+										} else {
+											enqueueSnackbar(
+												"Số lượng xuất vượt quá tồn kho!!",
+												{ variant: "error" }
+											);
+										}
+									}
+								}}
 								onFocus={(e) => e.target.select()}
 							/>
 						</div>
@@ -228,7 +247,7 @@ export default function SellProductPage() {
 								onFocus={(e) => e.target.select()}
 							/>
 						</div>
-						<div className="w-2/12 ps-3">
+						<div className="w-1/12 ps-3">
 							<Button
 								onClick={handleAddProduct}
 								fullWidth

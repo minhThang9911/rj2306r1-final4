@@ -13,10 +13,11 @@ import { useActionData, useLoaderData, useSubmit } from "@remix-run/react";
 import { useEffect, useMemo, useState } from "react";
 import { v4 } from "uuid";
 import { api, getApiLink } from "~/config/api";
-import { fetcherServer, getData, postData } from "~/server/api.server";
+import { getData, postData } from "~/server/api.server";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { sumWithMultiplyFields } from "~/utils/calc";
 import { useSnackbar } from "notistack";
+import { formatPrice } from "~/utils/string";
 
 export const loader = async () => {
 	const products = await getData(
@@ -99,7 +100,7 @@ export default function BuyProductPage() {
 					if (params.value == null) {
 						return "";
 					}
-					return `$${params.value.toLocaleString()}`;
+					return formatPrice(params.value);
 				},
 			},
 			{
@@ -211,7 +212,7 @@ export default function BuyProductPage() {
 						<div className="w-2/12">
 							<TextField
 								name="quantity"
-								label="Số lượng"
+								label="Số lượng nhập hàng"
 								fullWidth
 								value={inputProduct?.quantity}
 								onChange={handleAddProductChange}
@@ -220,7 +221,7 @@ export default function BuyProductPage() {
 						</div>
 						<div className="w-2/12">
 							<TextField
-								label="Đơn giá"
+								label="Đơn giá (VNĐ)"
 								name="price"
 								fullWidth
 								value={inputProduct?.price}
@@ -309,11 +310,13 @@ export default function BuyProductPage() {
 							<Divider sx={{ margin: "1em 0" }} />
 							<Typography>Tiền hàng</Typography>
 							<Typography>
-								Tổng cộng: $
-								{sumWithMultiplyFields(importList, [
-									"quantity",
-									"price",
-								])}
+								Tổng cộng:{" "}
+								{formatPrice(
+									sumWithMultiplyFields(importList, [
+										"quantity",
+										"price",
+									])
+								)}
 							</Typography>
 						</div>
 						<div className="text-center">

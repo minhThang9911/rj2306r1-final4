@@ -144,8 +144,10 @@ function UserListPage() {
 				renderCell: (param) => {
 					return (
 						<img
+							className="cursor-pointer"
 							src={param.row.avatar[0]}
 							alt={param.row.fullName}
+							onClick={editUser(param.row)}
 						/>
 					);
 				},
@@ -343,12 +345,17 @@ function UserListPage() {
 										name="address"
 										onChange={handleSelectUser}
 									/>
-									<TextareaAutosize
-										className="w-full text-sm font-normal font-sans leading-5 p-3 rounded-xl rounded-br-none shadow-md shadow-slate-100 focus:shadow-outline-purple focus:shadow-lg border border-solid border-slate-300 hover:border-purple-500 focus:border-purple-500 bg-white text-slate-900 focus-visible:outline-0"
-										aria-label="Giới thiệu"
-										placeholder="Giới thiệu"
+									<TextField
+										sx={{
+											marginBottom: "2em",
+										}}
+										fullWidth
+										variant="standard"
+										label="Giới thiệu"
+										value={seletedUser?.info}
 										name="info"
 										onChange={handleSelectUser}
+										multiline
 									/>
 								</div>
 								<div className="flex-shrink-0 flex justify-around">
