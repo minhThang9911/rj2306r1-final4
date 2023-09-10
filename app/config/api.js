@@ -23,4 +23,5 @@ export const getApiLink = {
 	withId: (type, id) => `${type}/${id}`,
 	withParams: (type, param) => `${type}?${param}`,
 	expand: (type, type2) => `${type}?_expand=${type2}`,
+	filter: (type, field, keyword) => `${type}?${field}=${keyword}`,
 };

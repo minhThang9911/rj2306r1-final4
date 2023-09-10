@@ -1,4 +1,5 @@
 import { redirect } from "@remix-run/node";
+import { requireUserId } from "~/server/auth.server";
 
 export const meta = () => {
 	return [
@@ -8,5 +9,6 @@ export const meta = () => {
 };
 
 export const loader = async ({ request }) => {
+	await requireUserId(request);
 	return redirect("/home");
 };

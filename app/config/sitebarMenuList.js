@@ -77,7 +77,7 @@ export const sidebarSettingMenus = [
 	{
 		title: "Thoát",
 		icon: ExitToAppIcon,
-		link: "/home/exit",
+		link: "/logout",
 		pemision: "any",
 	},
 ];
