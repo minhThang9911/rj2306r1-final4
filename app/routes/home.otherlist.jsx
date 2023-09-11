@@ -59,12 +59,12 @@ export default function OtherListPage() {
 	return (
 		<div className="flex justify-between flex-wrap">
 			<div className="w-4/12 p-2">
-				{/* <SettingFormCard
+				<SettingFormCard
 					columns={columnRoles}
 					items={roles}
 					apiLink={getApiLink.base(api.type.roles)}
 					settingTitle="Vai Trò"
-				/> */}
+				/>
 			</div>
 			<div className="w-4/12 p-2">
 				<SettingFormCard
