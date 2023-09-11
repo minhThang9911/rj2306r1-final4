@@ -58,15 +58,15 @@ export default function OtherListPage() {
 	const { roles, payments, categories } = useLoaderData();
 	return (
 		<div className="flex justify-between flex-wrap">
-			<div className="w-4/12 p-2">
+			{/* <div className="w-4/12 p-2">
 				<SettingFormCard
 					columns={columnRoles}
 					items={roles}
 					apiLink={getApiLink.base(api.type.roles)}
 					settingTitle="Vai Trò"
 				/>
-			</div>
-			<div className="w-4/12 p-2">
+			</div> */}
+			<div className="w-6/12 p-2">
 				<SettingFormCard
 					columns={columnPayments}
 					items={payments}
@@ -74,7 +74,7 @@ export default function OtherListPage() {
 					settingTitle="Phương thức thanh toán"
 				/>
 			</div>
-			<div className="w-4/12 p-2">
+			<div className="w-6/12 p-2">
 				<SettingFormCard
 					columns={columncategorie}
 					items={categories}

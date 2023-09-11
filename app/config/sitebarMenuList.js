@@ -9,6 +9,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import EngineeringIcon from "@mui/icons-material/Engineering";
 
 export const sidebarMainMenus = [
 	{
@@ -61,7 +62,12 @@ export const sidebarSettingMenus = [
 		link: "/home/otherlist",
 		pemision: "any",
 	},
-
+	{
+		title: "Phân quyền",
+		icon: EngineeringIcon,
+		link: "/home/manager",
+		pemision: "any",
+	},
 	{
 		title: "Nhân sự",
 		icon: ManageAccountsIcon,

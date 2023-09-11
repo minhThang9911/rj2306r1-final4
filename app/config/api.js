@@ -15,6 +15,7 @@ export const api = {
 		appinfo: "appinfo",
 		buys: "buys",
 		sells: "sells",
+		regcode: "regcode",
 	},
 };
 

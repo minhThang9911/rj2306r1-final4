@@ -1,7 +1,9 @@
 import { json, redirect } from "@remix-run/node";
-import { useActionData, useSubmit } from "@remix-run/react";
+import { useSubmit } from "@remix-run/react";
 import { useState } from "react";
+import { api, getApiLink } from "~/config/api";
 import { submitOption } from "~/config/constant";
+import { deleteData, getData } from "~/server/api.server";
 import { getUser, login, register } from "~/server/auth.server";
 import {
 	validateEmail,
@@ -29,6 +31,7 @@ export const action = async ({ request }) => {
 			_action,
 		});
 	}
+
 	switch (_action) {
 		case "login": {
 			return await login(user.email, user.password);
@@ -47,6 +50,8 @@ function LoginPage() {
 		email: "",
 		password: "",
 		fullName: "",
+		password2: "",
+		code: "",
 	});
 	const handleChange = (e) => {
 		setUser((pre) => ({
@@ -54,8 +59,6 @@ function LoginPage() {
 			[e.target.name]: e.target.value,
 		}));
 	};
-	const errorValidate = useActionData();
-	const [loading, setLoading] = useState(false);
 	const [isReg, setIsreg] = useState(false);
 	const handleSubmit = () => {
 		let _action = "login";
@@ -124,6 +127,23 @@ function LoginPage() {
 										Mật khẩu
 									</label>
 								</div>
+								<div className="relative">
+									<input
+										autoComplete="off"
+										id="password2"
+										name="password2"
+										type="password"
+										className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
+										placeholder="Nhập lại Mật khẩu"
+										value={user.password2}
+										onChange={handleChange}
+									/>
+									<label
+										htmlFor="password2"
+										className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+										Nhập lại Mật khẩu
+									</label>
+								</div>
 								{isReg && (
 									<div className="relative">
 										<input
@@ -152,6 +172,8 @@ function LoginPage() {
 											type="text"
 											className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
 											placeholder="Mã tạo tài khoản"
+											value={user.code}
+											onChange={handleChange}
 										/>
 										<label
 											htmlFor="code"

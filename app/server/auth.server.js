@@ -1,5 +1,5 @@
 import { api, getApiLink } from "~/config/api";
-import { getData, postData } from "./api.server";
+import { deleteData, getData, postData } from "./api.server";
 import { createCookieSessionStorage, json, redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
 
@@ -36,7 +36,7 @@ const createUser = async (user) => {
 		email: user.email,
 		password: passwordHash,
 		settingId: 1,
-		roleId: 1,
+		roleId: user.roleId,
 		username: "",
 		fullName: user.fullName,
 		regDate: new Date().toISOString(),
@@ -55,14 +55,28 @@ export const register = async (user) => {
 	const exists = await getData(
 		getApiLink.filter(api.type.users, "email", user.email)
 	);
+	const regCodeList = await getData(getApiLink.base(api.type.regcode));
+
 	if (exists.length) {
 		return json({ error: "Email này đã được đăng ký" });
 	}
-	const newUser = await createUser(user);
+
+	const codeIndex = regCodeList.findIndex((item) => item.code === user.code);
+	if (codeIndex === -1) {
+		return json({
+			error: "Sai mã tạo tài khoản",
+		});
+	}
+	await deleteData(
+		getApiLink.withId(api.type.regcode, regCodeList[codeIndex].id)
+	);
+	const newUser = await createUser({
+		...user,
+		roleId: regCodeList[codeIndex].rolesId,
+	});
 	if (!newUser) {
 		return json({ error: `Error create user ${user.email}})` });
 	}
-
 	return createUserSession(newUser.id, "/home");
 };
 
