@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import chatIcon from "./chatIcon.svg";
 import bellIcon from "./bellIcon.svg";
+import Clock from "react-live-clock";
 import { useLocation } from "@remix-run/react";
 import {
 	sidebarMainMenus,
@@ -40,7 +41,15 @@ function Header() {
 						<Typography variant="h4">{title}</Typography>
 					</div>
 					<div className=" flex space-x-5 justify-center items-center pl-2 pe-5">
-						<div className="relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
+						<Typography variant="p">
+							<Clock
+								format={"DD/MM/YYYY, h:mm:ss A"}
+								ticking={true}
+								timezone={"Asia/Ho_Chi_Minh"}
+								noSsr
+							/>
+						</Typography>
+						{/* <div className="relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
 							<img src={chatIcon} alt="Chat" />
 							<div className="animate-ping w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto duration-200"></div>
 							<div className=" w-1.5 h-1.5 bg-indigo-700 rounded-full absolute -top-1 -right-1 m-auto shadow-lg"></div>
@@ -49,7 +58,7 @@ function Header() {
 							className="cursor-pointer"
 							src={bellIcon}
 							alt="Notification"
-						/>
+						/> */}
 					</div>
 				</nav>
 			</div>

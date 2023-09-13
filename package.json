@@ -24,6 +24,7 @@
 		"@remix-run/serve": "^1.19.3",
 		"axios": "^1.4.0",
 		"bcryptjs": "^2.4.3",
+		"dayjs": "^1.11.9",
 		"imgbb-uploader": "^1.5.1",
 		"immer": "^10.0.2",
 		"isbot": "^3.6.8",
@@ -45,6 +46,7 @@
 		"@types/react-dom": "^18.0.11",
 		"clsx": "^2.0.0",
 		"eslint": "^8.38.0",
+		"react-live-clock": "^6.1.16",
 		"tailwindcss": "^3.3.3",
 		"typescript": "^5.0.4"
 	},
