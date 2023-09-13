@@ -10,5 +10,5 @@ export const meta = () => {
 
 export const loader = async ({ request }) => {
 	await requireUserId(request);
-	return redirect("/home");
+	return redirect("/home/dashboard");
 };

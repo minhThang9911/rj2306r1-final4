@@ -91,7 +91,7 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-export default function Sidebar({ children }) {
+export default function Sidebar({ user, children }) {
 	const [open, setOpen] = useState(false);
 	const { changeSettings } = useContext(GlobalContext);
 	return (
@@ -100,9 +100,9 @@ export default function Sidebar({ children }) {
 			<Drawer variant="permanent" open={open}>
 				<List>
 					<ListItem
-						key="menu"
 						disablePadding
-						sx={{ display: "block" }}>
+						sx={{ display: "block" }}
+						key="sbHeader">
 						<ListItemButton
 							onClick={() => setOpen(!open)}
 							sx={{
@@ -122,95 +122,113 @@ export default function Sidebar({ children }) {
 								sx={{
 									opacity: open ? 1 : 0,
 									textAlign: "right",
+									display: "flex",
+									justifyContent: "space-between",
 								}}>
 								<img
 									src={logo}
-									alt="Logo"
-									className="inline align-middle w-6"
+									alt="MT Inventory"
+									className="inline align-middle w-6 mr-2"
 								/>{" "}
-								<span>MT Inventory</span>
+								<span className="font-normal text-gray-800">
+									MT Inventory
+								</span>
 								<ChevronLeftIcon />
 							</ListItemText>
 						</ListItemButton>
 					</ListItem>
-					<Divider />
+					<Divider key="dv1" />
 					{sidebarMainMenus.map((item) => {
 						const Icon = item.icon;
 						return (
-							<ListItem
-								key={item.title}
-								disablePadding
-								sx={{ display: "block" }}>
-								<ListItemButton
-									onClick={() =>
-										changeSettings.changePageTitle(
-											item.title
-										)
-									}
-									component={Link}
-									to={item.link}
-									sx={{
-										minHeight: 48,
-										justifyContent: open
-											? "initial"
-											: "center",
-										px: 2.5,
-									}}>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											mr: open ? 3 : "auto",
-											justifyContent: "center",
-										}}>
-										<Icon />
-									</ListItemIcon>
-									<ListItemText
-										primary={item.title}
-										sx={{ opacity: open ? 1 : 0 }}
-									/>
-								</ListItemButton>
-							</ListItem>
+							<>
+								{(user.roles.permision[item.permision] ===
+									"1" ||
+									typeof user.roles.permision[
+										item.permision
+									] === "undefined") && (
+									<ListItem
+										key={item.link}
+										disablePadding
+										sx={{ display: "block" }}>
+										<ListItemButton
+											onClick={() =>
+												changeSettings.changePageTitle(
+													item.title
+												)
+											}
+											component={Link}
+											to={item.link}
+											sx={{
+												minHeight: 48,
+												justifyContent: open
+													? "initial"
+													: "center",
+												px: 2.5,
+											}}>
+											<ListItemIcon
+												sx={{
+													minWidth: 0,
+													mr: open ? 3 : "auto",
+													justifyContent: "center",
+												}}>
+												<Icon />
+											</ListItemIcon>
+											<ListItemText
+												primary={item.title}
+												sx={{ opacity: open ? 1 : 0 }}
+											/>
+										</ListItemButton>
+									</ListItem>
+								)}
+							</>
 						);
 					})}
-				</List>
-				<Divider />
-				<List>
+					<Divider key="dv2" />
 					{sidebarSettingMenus.map((item) => {
 						const Icon = item.icon;
 						return (
-							<ListItem
-								key={item.title}
-								disablePadding
-								sx={{ display: "block" }}>
-								<ListItemButton
-									onClick={() =>
-										changeSettings.changePageTitle(
-											item.title
-										)
-									}
-									component={Link}
-									to={item.link}
-									sx={{
-										minHeight: 48,
-										justifyContent: open
-											? "initial"
-											: "center",
-										px: 2.5,
-									}}>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											mr: open ? 3 : "auto",
-											justifyContent: "center",
-										}}>
-										<Icon />
-									</ListItemIcon>
-									<ListItemText
-										primary={item.title}
-										sx={{ opacity: open ? 1 : 0 }}
-									/>
-								</ListItemButton>
-							</ListItem>
+							<>
+								{(user.roles.permision[item.permision] ===
+									"1" ||
+									typeof user.roles.permision[
+										item.permision
+									] === "undefined") && (
+									<ListItem
+										key={item.link}
+										disablePadding
+										sx={{ display: "block" }}>
+										<ListItemButton
+											onClick={() =>
+												changeSettings.changePageTitle(
+													item.title
+												)
+											}
+											component={Link}
+											to={item.link}
+											sx={{
+												minHeight: 48,
+												justifyContent: open
+													? "initial"
+													: "center",
+												px: 2.5,
+											}}>
+											<ListItemIcon
+												sx={{
+													minWidth: 0,
+													mr: open ? 3 : "auto",
+													justifyContent: "center",
+												}}>
+												<Icon />
+											</ListItemIcon>
+											<ListItemText
+												primary={item.title}
+												sx={{ opacity: open ? 1 : 0 }}
+											/>
+										</ListItemButton>
+									</ListItem>
+								)}
+							</>
 						);
 					})}
 				</List>

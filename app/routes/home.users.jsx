@@ -3,7 +3,6 @@ import { deleteData, editData, getData, postData } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useCallback, useContext, useMemo, useState } from "react";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -118,7 +117,7 @@ function UserListPage() {
 		setSelectUser({
 			id: v4(),
 			settingId: 1,
-			roleId: 1,
+			rolesId: 1,
 			username: "",
 			email: "",
 			password: "",
@@ -161,7 +160,7 @@ function UserListPage() {
 				flex: 2,
 				valueGetter: (params) => {
 					return userRoles.find(
-						(item) => item.id === params.row.roleId
+						(item) => item.id === params.row.rolesId
 					).title;
 				},
 			},
@@ -286,9 +285,9 @@ function UserListPage() {
 										<Select
 											labelId="user-role-select-label"
 											id="demo-simple-select"
-											value={seletedUser?.roleId}
+											value={seletedUser?.rolesId}
 											label="Vai trò"
-											name="roleId"
+											name="rolesId"
 											onChange={handleSelectUser}>
 											{userRoles.map((item) => {
 												return (

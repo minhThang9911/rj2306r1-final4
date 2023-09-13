@@ -3,7 +3,6 @@ import { uploadImg } from "~/server/upload.server";
 
 function DashboardPage() {
 	const res = useActionData();
-	console.log(res);
 	return (
 		<div>
 			<form method="post">

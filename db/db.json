@@ -43,11 +43,6 @@
       "id": 7
     },
     {
-      "rolesId": 4,
-      "code": "VVQOlGMYRs",
-      "id": 9
-    },
-    {
       "rolesId": 1,
       "code": "ESKPj5X9yx",
       "id": 10
@@ -72,17 +67,17 @@
     {
       "id": 2,
       "title": "Nhập hàng",
-      "permision": "0101010"
+      "permision": "0101100"
     },
     {
       "id": 3,
       "title": "Bán hàng",
-      "permision": "0111111"
+      "permision": "0011110"
     },
     {
       "id": 4,
       "title": "Thủ kho",
-      "permision": "0111110"
+      "permision": "0001100"
     }
   ],
   "payments": [
@@ -155,18 +150,39 @@
       "email": "admin@mail.com",
       "password": "$2a$10$2b1MxZEOywEnOix5bsu1P.32E2O4fo9rkFglH7ytN8lY/gLxgFoY2",
       "settingId": 1,
-      "roleId": 1,
+      "rolesId": 1,
       "username": "",
       "fullName": "Im Admin",
       "regDate": "2023-09-10T16:01:28.367Z",
       "country": "",
-      "avatar": [],
+      "avatar": [
+        "https://iili.io/JH9Jpmg.jpg"
+      ],
       "info": "",
       "phone": "",
       "birthday": "",
       "address": "",
       "lastLogin": "2023-09-10T16:01:28.367Z",
       "id": 1
+    },
+    {
+      "email": "thukho@mail.com",
+      "password": "$2a$10$2woCAtOikPsddJfIwkz5IeE4R.e/RNAQCbkCdws65TMpTmFkli83K",
+      "settingId": 1,
+      "rolesId": 4,
+      "username": "",
+      "fullName": "Thu kho",
+      "regDate": "2023-09-12T14:28:37.364Z",
+      "country": "",
+      "avatar": [
+        "https://iili.io/JH9xvrg.jpg"
+      ],
+      "info": "",
+      "phone": "",
+      "birthday": "",
+      "address": "",
+      "lastLogin": "2023-09-12T14:28:37.364Z",
+      "id": 2
     }
   ],
   "suppliers": [

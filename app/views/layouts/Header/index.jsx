@@ -17,7 +17,7 @@ const linkToTitle = (link) => {
 	} else return "...";
 };
 
-function Header() {
+function Header({ user }) {
 	const location = useLocation();
 	const title = useMemo(
 		() => linkToTitle(location.pathname),
@@ -31,9 +31,17 @@ function Header() {
 			<div className="bg-white rounded shadow-lg h-full">
 				<nav className="flex justify-between h-full relative">
 					<div className="flex items-center space-x-3 lg:pr-16 pr-6 ps-5">
-						<img src={logo} alt="Logo" />
+						{user.avatar.length > 0 ? (
+							<img
+								src={user.avatar[0]}
+								alt={user.fullName}
+								className="inline-block w-10 h-10 rounded-full object-cover"
+							/>
+						) : (
+							<img src={logo} alt="Logo" />
+						)}
 						<h2 className="font-normal text-2xl leading-6 text-gray-800">
-							MT Inventory
+							{user.fullName}
 						</h2>
 					</div>
 					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

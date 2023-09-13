@@ -2,6 +2,10 @@ import { api, getApiLink } from "~/config/api";
 import { deleteData, getData, postData } from "./api.server";
 import { createCookieSessionStorage, json, redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
+import {
+	sidebarMainMenus,
+	sidebarSettingMenus,
+} from "~/config/sitebarMenuList";
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
@@ -36,7 +40,7 @@ const createUser = async (user) => {
 		email: user.email,
 		password: passwordHash,
 		settingId: 1,
-		roleId: user.roleId,
+		rolesId: user.rolesId,
 		username: "",
 		fullName: user.fullName,
 		regDate: new Date().toISOString(),
@@ -72,7 +76,7 @@ export const register = async (user) => {
 	);
 	const newUser = await createUser({
 		...user,
-		roleId: regCodeList[codeIndex].rolesId,
+		rolesId: regCodeList[codeIndex].rolesId,
 	});
 	if (!newUser) {
 		return json({ error: `Error create user ${user.email}})` });
@@ -109,13 +113,32 @@ export const getUserId = async (request) => {
 };
 
 export const requireUserId = async (request, redirectTo) => {
-	const userId = await getUserId(request);
-	if (!userId || typeof userId !== "number") {
+	const user = await getUser(request);
+	if (!user) {
 		const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
 		throw redirect(`/auth?${searchParams}`);
 	}
-	return userId;
+	const menuList = [...sidebarMainMenus, ...sidebarSettingMenus];
+	const currentUrl = request.url.replace(/^.*\/\/[^/]+/, "");
+	const menu = menuList.find((item) => item.link === currentUrl);
+	if (
+		typeof menu === "undefined" ||
+		typeof user.roles.permision[menu.permision] === "undefined" ||
+		user.roles.permision[menu.permision] === "1"
+	) {
+		return user;
+	}
+	throw redirect(`/home/dashboard`);
 };
+
+// export const requireUserId = async (request, redirectTo) => {
+// 	const userId = await getUserId(request);
+// 	if (!userId || typeof userId !== "number") {
+// 		const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
+// 		throw redirect(`/auth?${searchParams}`);
+// 	}
+// 	return userId;
+// };
 
 export const logout = async (request) => {
 	const session = await getUserSession(request);
@@ -128,13 +151,11 @@ export const logout = async (request) => {
 };
 
 export const getUser = async (request) => {
-	const userId = getUserId(request);
+	const userId = await getUserId(request);
 	if (typeof userId !== "number") return null;
 	try {
-		const users = await getData(
-			getApiLink.filter(api.type.users, "id", userId)
-		);
-		return users[0];
+		const users = await getData(`users/${userId}?_expand=roles`);
+		return users;
 	} catch {
 		throw logout(request);
 	}
