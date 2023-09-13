@@ -99,6 +99,9 @@ function LoginPage() {
 					<div>
 						<p>Email: admin@mail.com</p>
 						<p>Password: 123456</p>
+						<hr />
+						<p>Email: thukho@mail.com</p>
+						<p>Password: 123456</p>
 					</div>
 				)}
 			</div>

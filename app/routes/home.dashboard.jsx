@@ -1,17 +1,17 @@
-import { useActionData } from "@remix-run/react";
-import { uploadImg } from "~/server/upload.server";
-import ReactWeather, { useOpenWeather } from "~/components/Weather";
+import ReactWeather from "react-open-weather";
+import useWeatherBit from "~/hooks/weatherbit/useWeatherBit";
+
 export const action = async ({ request, params }) => {
 	return null;
 };
 
+const weatherCity = "Ho Chi Minh";
 export default function DashboardPage() {
-	const { data, isLoading, errorMessage } = useOpenWeather({
-		key: "d6a5f2be07d308324adda7c689af586b",
-		lat: "48.137154",
-		lon: "11.576124",
+	const { data, isLoading, errorMessage } = useWeatherBit({
+		key: "1d868f8f8f13445a9a064484068ae5a5",
+		city: weatherCity,
 		lang: "en",
-		unit: "metric", // values are (metric, standard, imperial)
+		unit: "M", // values are (M,S,I)
 	});
 
 	return (
@@ -21,7 +21,7 @@ export default function DashboardPage() {
 				errorMessage={errorMessage}
 				data={data}
 				lang="en"
-				locationLabel="Munich"
+				locationLabel={weatherCity}
 				unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
 				showForecast
 			/>
