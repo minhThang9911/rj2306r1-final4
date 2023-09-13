@@ -2,12 +2,12 @@ import FileBase64 from "react-file-base64";
 import { defaultImgSrc } from "~/config";
 
 function Img({ src, alt = "", images, setImages, className = "", index }) {
-	const isDefault = src === defaultImgSrc;
+	const isDefault = src === defaultImgSrc || typeof src === "undefined";
 	return (
 		<div className={`p-2 relative ${className}`}>
 			<img
 				className="block w-full aspect-square rounded-3xl object-cover"
-				src={src}
+				src={typeof src === "undefined" ? defaultImgSrc : src}
 				alt={alt}
 			/>
 			<div className="group absolute inset-x-0 inset-y-0 hover:backdrop-blur-sm transition-all">

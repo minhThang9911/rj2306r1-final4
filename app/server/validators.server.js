@@ -12,6 +12,11 @@ export const validatePassword = (password) => {
 		return "Mật khẩu ít nhất 5 ký tự";
 	}
 };
+export const validatePasswordReTyping = (password, password2) => {
+	if (password !== password2) {
+		return "Mật khẩu nhập lại không đúng";
+	}
+};
 
 export const validateName = (name) => {
 	if (!name.length) return `Vui lòng nhập tên`;

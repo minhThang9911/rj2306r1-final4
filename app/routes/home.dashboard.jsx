@@ -1,29 +1,30 @@
 import { useActionData } from "@remix-run/react";
 import { uploadImg } from "~/server/upload.server";
+import ReactWeather, { useOpenWeather } from "~/components/Weather";
+export const action = async ({ request, params }) => {
+	return null;
+};
 
-function DashboardPage() {
-	const res = useActionData();
+export default function DashboardPage() {
+	const { data, isLoading, errorMessage } = useOpenWeather({
+		key: "d6a5f2be07d308324adda7c689af586b",
+		lat: "48.137154",
+		lon: "11.576124",
+		lang: "en",
+		unit: "metric", // values are (metric, standard, imperial)
+	});
+
 	return (
 		<div>
-			<form method="post">
-				<button type="submit">Test Upload</button>
-			</form>
-			<button
-				onClick={() => {
-					const data =
-						"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgF";
-					console.log(data.replace("data:image/jpeg;base64,", ""));
-				}}>
-				Test
-			</button>
+			<ReactWeather
+				isLoading={isLoading}
+				errorMessage={errorMessage}
+				data={data}
+				lang="en"
+				locationLabel="Munich"
+				unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
+				showForecast
+			/>
 		</div>
 	);
 }
-
-export const action = async ({ request, params }) => {
-	const res = await uploadImg(
-		"https://fonesmart.com.vn/upload_images/images/2023/03/11/hinh-nen-phi-hanh-gia-01.jpg"
-	);
-	return { res };
-};
-export default DashboardPage;
