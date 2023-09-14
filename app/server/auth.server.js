@@ -7,7 +7,7 @@ import {
 	sidebarSettingMenus,
 } from "~/config/sitebarMenuList";
 
-const sessionSecret = process.env.SESSION_SECRET;
+const sessionSecret = "MT_INventory";
 if (!sessionSecret) {
 	throw new Error("No SESSION_SECRET");
 }

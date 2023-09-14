@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3004/";
+const baseUrl = "https://api.minhthang.site/";
 export const api = {
 	baseUrl,
 	type: {
