@@ -148,7 +148,12 @@ export default function ProductListPage() {
 
 	const handleNew = () => {
 		setIsNew(true);
-		setImages(["/img/placeholder-image.jpg"]);
+		setImages([
+			"/img/placeholder-image.jpg",
+			"/img/placeholder-image.jpg",
+			"/img/placeholder-image.jpg",
+			"/img/placeholder-image.jpg",
+		]);
 		setSelectProduct({
 			id: v4(),
 			name: "",
@@ -164,6 +169,7 @@ export default function ProductListPage() {
 			rate: 5,
 			createAt: new Date().toISOString(),
 		});
+
 		setOpenModal(true);
 	};
 

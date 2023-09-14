@@ -20,13 +20,17 @@ export const calcStock = (buys, sells, products) => {
 	buys.forEach((item) =>
 		item.products.forEach((p) => {
 			const index = findIndexById(p.productsId);
-			res[index].stock += p.quantity;
+			if (index !== -1) {
+				res[index].stock += p.quantity;
+			}
 		})
 	);
 	sells.forEach((item) =>
 		item.products.forEach((p) => {
 			const index = findIndexById(p.productsId);
-			res[index].stock -= p.quantity;
+			if (index !== -1) {
+				res[index].stock -= p.quantity;
+			}
 		})
 	);
 	return res;

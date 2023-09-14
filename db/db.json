@@ -34,11 +34,6 @@
     },
     {
       "rolesId": 3,
-      "code": "n1B83Qr8pG",
-      "id": 6
-    },
-    {
-      "rolesId": 3,
       "code": "ssvJBGkqBs",
       "id": 7
     },
@@ -183,6 +178,40 @@
       "address": "",
       "lastLogin": "2023-09-12T14:28:37.364Z",
       "id": 2
+    },
+    {
+      "email": "banhang@mail.com",
+      "password": "$2a$10$EN4xP01j8W7s1O4yXL9fZeYlb8.i8qnqmqPH8lu6MdRkVulkBd1yW",
+      "settingId": 1,
+      "rolesId": 3,
+      "username": "",
+      "fullName": "Ban hang",
+      "regDate": "2023-09-13T12:43:16.064Z",
+      "country": "",
+      "avatar": [],
+      "info": "",
+      "phone": "",
+      "birthday": "",
+      "address": "",
+      "lastLogin": "2023-09-13T12:43:16.064Z",
+      "id": 3
+    },
+    {
+      "email": "ban2hang@mail.com",
+      "password": "$2a$10$yHVFYUlFl6fiUvRF0tb67eQvBR5BJ4V81oFK0vZZ6wWMcx/qK7UNa",
+      "settingId": 1,
+      "rolesId": 3,
+      "username": "",
+      "fullName": "ban hang",
+      "regDate": "2023-09-13T13:06:02.165Z",
+      "country": "",
+      "avatar": [],
+      "info": "",
+      "phone": "",
+      "birthday": "",
+      "address": "",
+      "lastLogin": "2023-09-13T13:06:02.165Z",
+      "id": 4
     }
   ],
   "suppliers": [
@@ -237,55 +266,10 @@
   ],
   "products": [
     {
-      "id": 1,
-      "name": "Generic Rubber Bacon",
-      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-      "price": 646,
-      "categoriesId": 4,
-      "images": [
-        "https://picsum.photos/640/640?r=7199",
-        "https://picsum.photos/640/640?r=497",
-        "https://picsum.photos/640/640?r=3556"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 2,
-      "name": "Intelligent Fresh Shirt",
-      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-      "price": 639,
-      "categoriesId": 4,
-      "images": [
-        "https://picsum.photos/640/640?r=385",
-        "https://picsum.photos/640/640?r=2327",
-        "https://picsum.photos/640/640?r=2355"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 3,
-      "name": "Handmade Bronze Tuna",
-      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-      "price": 641,
-      "categoriesId": 4,
-      "images": [
-        "https://picsum.photos/640/640?r=7847",
-        "https://picsum.photos/640/640?r=4970",
-        "https://picsum.photos/640/640?r=5943"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
       "id": 4,
       "name": "Handmade Metal Bike",
       "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-      "price": 288,
+      "price": "3000",
       "categoriesId": 3,
       "images": [
         "https://picsum.photos/640/640?r=5194",
@@ -294,22 +278,8 @@
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 5,
-      "name": "Small Metal Chair",
-      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-      "price": 976,
-      "categoriesId": 3,
-      "images": [
-        "https://picsum.photos/640/640?r=1911",
-        "https://picsum.photos/640/640?r=4764",
-        "https://picsum.photos/640/640?r=6347"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
+      "updateAt": "2023-09-04T02:20:54.000Z",
+      "stock": 0
     },
     {
       "id": 6,
@@ -372,81 +342,6 @@
       "updateAt": "2023-09-04T02:20:54.000Z"
     },
     {
-      "id": 11,
-      "name": "Sleek Plastic Pants",
-      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-      "price": 728,
-      "categoriesId": 2,
-      "images": [
-        "https://picsum.photos/640/640?r=3430",
-        "https://picsum.photos/640/640?r=5827",
-        "https://picsum.photos/640/640?r=3453"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 12,
-      "name": "Modern Cotton Cheese",
-      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-      "price": 324,
-      "categoriesId": 4,
-      "images": [
-        "https://picsum.photos/640/640?r=2862",
-        "https://picsum.photos/640/640?r=6210",
-        "https://picsum.photos/640/640?r=1643"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 13,
-      "name": "Practical Soft Car",
-      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-      "price": 210,
-      "categoriesId": 2,
-      "images": [
-        "https://picsum.photos/640/640?r=5116",
-        "https://picsum.photos/640/640?r=1227",
-        "https://picsum.photos/640/640?r=7159"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 14,
-      "name": "Recycled Metal Table",
-      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-      "price": 835,
-      "categoriesId": 5,
-      "images": [
-        "https://picsum.photos/640/640?r=6445",
-        "https://picsum.photos/640/640?r=1051",
-        "https://picsum.photos/640/640?r=7812"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 15,
-      "name": "Incredible Soft Pants",
-      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-      "price": 677,
-      "categoriesId": 1,
-      "images": [
-        "https://picsum.photos/640/640?r=3750",
-        "https://picsum.photos/640/640?r=4377",
-        "https://picsum.photos/640/640?r=6118"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
       "id": 16,
       "name": "Oriental Metal Chicken",
       "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
@@ -456,36 +351,6 @@
         "https://picsum.photos/640/640?r=4526",
         "https://picsum.photos/640/640?r=9840",
         "https://picsum.photos/640/640?r=3895"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 17,
-      "name": "Sleek Frozen Bike",
-      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-      "price": 945,
-      "categoriesId": 2,
-      "images": [
-        "https://picsum.photos/640/640?r=2977",
-        "https://picsum.photos/640/640?r=9926",
-        "https://picsum.photos/640/640?r=7944"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 18,
-      "name": "Ergonomic Bronze Fish",
-      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-      "price": 880,
-      "categoriesId": 1,
-      "images": [
-        "https://picsum.photos/640/640?r=1631",
-        "https://picsum.photos/640/640?r=8724",
-        "https://picsum.photos/640/640?r=1889"
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
@@ -531,21 +396,6 @@
         "https://picsum.photos/640/640?r=7298",
         "https://picsum.photos/640/640?r=5824",
         "https://picsum.photos/640/640?r=8275"
-      ],
-      "rate": 5,
-      "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
-    },
-    {
-      "id": 22,
-      "name": "Luxurious Plastic Fish",
-      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-      "price": 477,
-      "categoriesId": 5,
-      "images": [
-        "https://picsum.photos/640/640?r=3379",
-        "https://picsum.photos/640/640?r=4414",
-        "https://picsum.photos/640/640?r=2340"
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
@@ -3212,141 +3062,14 @@
       "suppliersId": 1,
       "products": [
         {
-          "productsId": 3,
-          "quantity": 10,
-          "price": 20
-        },
-        {
-          "productsId": 9,
-          "quantity": 22,
-          "price": 112
-        },
-        {
-          "productsId": 4,
-          "quantity": 221,
-          "price": 221
+          "productsId": 2,
+          "quantity": 1000,
+          "price": 2000
         }
       ],
-      "createAt": "2023-09-06T03:14:21.217Z",
+      "createAt": "2023-09-13T13:41:46.678Z",
       "id": 1
-    },
-    {
-      "suppliersId": 2,
-      "products": [
-        {
-          "productsId": 10,
-          "quantity": 112,
-          "price": 212
-        },
-        {
-          "productsId": 3,
-          "quantity": 21,
-          "price": 221
-        }
-      ],
-      "createAt": "2023-09-06T03:14:40.358Z",
-      "id": 2
-    },
-    {
-      "suppliersId": 2,
-      "products": [
-        {
-          "productsId": 3,
-          "quantity": 100,
-          "price": 2000
-        },
-        {
-          "productsId": 6,
-          "quantity": 33,
-          "price": 25
-        }
-      ],
-      "createAt": "2023-09-06T12:41:21.280Z",
-      "id": 3
-    },
-    {
-      "suppliersId": 2,
-      "products": [
-        {
-          "productsId": 1,
-          "quantity": 10000,
-          "price": 200
-        }
-      ],
-      "createAt": "2023-09-07T13:41:52.676Z",
-      "id": 4
-    },
-    {
-      "suppliersId": 2,
-      "products": [
-        {
-          "productsId": 5,
-          "quantity": 2000,
-          "price": 100
-        },
-        {
-          "productsId": 6,
-          "quantity": 220,
-          "price": 2000
-        }
-      ],
-      "createAt": "2023-09-07T13:53:41.873Z",
-      "id": 5
     }
   ],
-  "sells": [
-    {
-      "customersId": 1,
-      "products": [
-        {
-          "productsId": 3,
-          "quantity": 10,
-          "price": 20
-        },
-        {
-          "productsId": 3,
-          "quantity": 222,
-          "price": 100
-        }
-      ],
-      "createAt": "2023-09-05T13:40:21.336Z",
-      "id": 1
-    },
-    {
-      "customersId": 1,
-      "products": [
-        {
-          "productsId": 5,
-          "quantity": 10,
-          "price": 22
-        }
-      ],
-      "createAt": "2023-09-05T13:45:15.953Z",
-      "id": 2
-    },
-    {
-      "customersId": 1,
-      "products": [
-        {
-          "productsId": 4,
-          "quantity": 12,
-          "price": 21
-        }
-      ],
-      "createAt": "2023-09-05T13:46:52.337Z",
-      "id": 3
-    },
-    {
-      "customersId": 1,
-      "products": [
-        {
-          "productsId": 3,
-          "quantity": 100,
-          "price": 20
-        }
-      ],
-      "createAt": "2023-09-07T14:28:21.565Z",
-      "id": 4
-    }
-  ]
+  "sells": []
 }

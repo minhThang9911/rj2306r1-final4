@@ -62,13 +62,13 @@ export const register = async (user) => {
 	const regCodeList = await getData(getApiLink.base(api.type.regcode));
 
 	if (exists.length) {
-		return json({ error: "Email này đã được đăng ký" });
+		return json({ error: { email: "Email này đã được đăng ký" } });
 	}
 
 	const codeIndex = regCodeList.findIndex((item) => item.code === user.code);
 	if (codeIndex === -1) {
 		return json({
-			error: "Sai mã tạo tài khoản",
+			error: { code: "Sai mã tạo tài khoản" },
 		});
 	}
 	await deleteData(
@@ -93,7 +93,12 @@ export const login = async (email, password) => {
 		const user = users[0];
 		const isSamePass = await bcrypt.compare(password, user.password);
 		if (!user || !isSamePass) {
-			return json({ error: "Sai email hoặc mật khẩu" });
+			return json({
+				error: {
+					email: "Sai email hoặc mật khẩu",
+					password: "Sai email hoặc mật khẩu",
+				},
+			});
 		}
 
 		return createUserSession(user.id, "/home");

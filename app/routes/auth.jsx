@@ -139,6 +139,7 @@ function LoginPage() {
 									onChange={handleChange}
 									error={!!validate?.error?.password}
 									helperText={validate?.error?.password ?? ""}
+									type="password"
 								/>
 
 								{isReg && (
@@ -154,6 +155,7 @@ function LoginPage() {
 											helperText={
 												validate?.error?.password2 ?? ""
 											}
+											type="password"
 										/>
 										<TextField
 											fullWidth
