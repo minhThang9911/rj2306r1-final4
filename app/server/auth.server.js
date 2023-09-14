@@ -81,7 +81,7 @@ export const register = async (user) => {
 	if (!newUser) {
 		return json({ error: `Error create user ${user.email}})` });
 	}
-	return createUserSession(newUser.id, "/home");
+	return createUserSession(newUser.id, "/home/dashboard");
 };
 
 export const login = async (email, password) => {
@@ -101,7 +101,7 @@ export const login = async (email, password) => {
 			});
 		}
 
-		return createUserSession(user.id, "/home");
+		return createUserSession(user.id, "/home/dashboard");
 	} else {
 		return json({ error: "Không tìm thấy tài khoản này!" });
 	}

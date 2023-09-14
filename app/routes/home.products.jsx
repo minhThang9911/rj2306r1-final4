@@ -8,7 +8,7 @@ import {
 } from "~/server/api.server";
 import { json } from "@remix-run/node";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -24,7 +24,7 @@ import {
 } from "@mui/material";
 import { v4 } from "uuid";
 import { uploadImg } from "~/server/upload.server";
-import { GlobalContext } from "~/root";
+
 import { api, getApiLink } from "~/config/api";
 import Img from "~/components/Img";
 import { defaultImgSrc } from "~/config";
@@ -50,7 +50,10 @@ export const action = async ({ request }) => {
 		case "update": {
 			const uploaded = [];
 			for (let i = 0; i < 4; i++) {
-				if (data.images[i] === defaultImgSrc) {
+				if (
+					typeof data.images[i] === "undefined" ||
+					data.images[i] === defaultImgSrc
+				) {
 					continue;
 				}
 				const url = await uploadImg(data.images[i]);
@@ -71,19 +74,26 @@ export const action = async ({ request }) => {
 		}
 		case "add": {
 			const uploaded = [];
-			data.images.forEach((item) => {
-				(async () => {
-					const url = await uploadImg(item);
-					if (url !== "error") {
-						uploaded.push(url);
-					} else {
-						uploaded.push(item);
-					}
-				})();
-			});
+			for (let i = 0; i < 4; i++) {
+				if (
+					typeof data.images[i] === "undefined" ||
+					data.images[i] === defaultImgSrc
+				) {
+					continue;
+				}
+				const url = await uploadImg(data.images[i]);
+				if (url !== "error") {
+					uploaded.push(url);
+				} else {
+					uploaded.push(data.images[i]);
+				}
+			}
 			const { id, ...tmp } = data;
-			tmp.images = uploaded;
-			return await postData(getApiLink.base(api.type.products), tmp);
+
+			return await postData(getApiLink.base(api.type.products), {
+				...tmp,
+				images: uploaded,
+			});
 		}
 		default: {
 			return data;
@@ -102,7 +112,6 @@ export default function ProductListPage() {
 	const [seletedProduct, setSelectProduct] = useState();
 	const [seletedProductBackup, setSelectProductBackup] = useState();
 	const [isNew, setIsNew] = useState(false);
-	const { settings } = useContext(GlobalContext);
 	const editProduct = useCallback(
 		(product) => () => {
 			const tmp = [...product.images];
@@ -160,12 +169,7 @@ export default function ProductListPage() {
 			description: "",
 			price: 0,
 			categoriesId: 1,
-			images: [
-				"/img/placeholder-image.jpg",
-				"/img/placeholder-image.jpg",
-				"/img/placeholder-image.jpg",
-				"/img/placeholder-image.jpg",
-			],
+			images: [],
 			rate: 5,
 			createAt: new Date().toISOString(),
 		});
@@ -214,7 +218,7 @@ export default function ProductListPage() {
 				},
 			},
 			{ field: "stock", headerName: "Tồn kho", flex: 1, type: "number" },
-			{ field: "rate", headerName: "Đánh giá", flex: 3, type: "number" },
+			// { field: "rate", headerName: "Đánh giá", flex: 3, type: "number" },
 
 			{
 				field: "actions",
@@ -308,6 +312,7 @@ export default function ProductListPage() {
 									/>
 
 									<FormControl
+										variant="standard"
 										fullWidth
 										sx={{
 											marginBottom: "2em",
@@ -316,6 +321,7 @@ export default function ProductListPage() {
 											Danh mục
 										</InputLabel>
 										<Select
+											sx={{ marginBottom: "1.5em" }}
 											labelId="product-categories-select-label"
 											value={seletedProduct?.categoriesId}
 											label="Danh mục"

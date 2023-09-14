@@ -70,11 +70,12 @@ export default function RoleCode({ regCode }) {
 								sx={{ marginBottom: "0.5em" }}>
 								Tạo mã
 							</Typography>
-							<FormControl fullWidth>
+							<FormControl fullWidth variant="standard">
 								<InputLabel id="role-select-label">
 									Vai trò
 								</InputLabel>
 								<Select
+									sx={{ marginBottom: "1.5em" }}
 									labelId="role-select-label"
 									id="role-select"
 									label="Vai trò"

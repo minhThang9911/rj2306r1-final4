@@ -30,23 +30,12 @@ export async function action({ request }) {
 	}
 }
 
-const columnRoles = [
-	{
-		field: "title",
-		title: "Vai trò",
-	},
-	{
-		field: "right",
-		title: "Phân quyền",
-	},
-];
-
-const columnPayments = [
-	{
-		field: "title",
-		title: "Phương thức thanh toán",
-	},
-];
+// const columnPayments = [
+// 	{
+// 		field: "title",
+// 		title: "Phương thức thanh toán",
+// 	},
+// ];
 const columncategorie = [
 	{
 		field: "title",
@@ -55,25 +44,17 @@ const columncategorie = [
 ];
 
 export default function OtherListPage() {
-	const { roles, payments, categories } = useLoaderData();
+	const { categories } = useLoaderData();
 	return (
 		<div className="flex justify-between flex-wrap">
-			{/* <div className="w-4/12 p-2">
-				<SettingFormCard
-					columns={columnRoles}
-					items={roles}
-					apiLink={getApiLink.base(api.type.roles)}
-					settingTitle="Vai Trò"
-				/>
-			</div> */}
-			<div className="w-6/12 p-2">
+			{/* <div className="w-6/12 p-2">
 				<SettingFormCard
 					columns={columnPayments}
 					items={payments}
 					apiType={api.type.payments}
 					settingTitle="Phương thức thanh toán"
 				/>
-			</div>
+			</div> */}
 			<div className="w-6/12 p-2">
 				<SettingFormCard
 					columns={columncategorie}

@@ -1,10 +1,7 @@
 export const uploadImg = async (imgString) => {
-	if (!imgString.startsWith("http")) {
+	if (imgString.startsWith("data:image/jpeg;base64,")) {
 		console.log("Start upload");
-		let base64String = imgString;
-		if (imgString.startsWith("data:image/jpeg;base64,")) {
-			base64String = imgString.replace("data:image/jpeg;base64,", "");
-		}
+		const base64String = imgString.replace("data:image/jpeg;base64,", "");
 		const myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 		const urlencoded = new URLSearchParams();

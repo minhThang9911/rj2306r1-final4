@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Cửa hàng ABC",
       "email": "skylight1122@protonmail.com",
-      "address": "dsadas fdaf",
+      "address": "dsadas fdafkk",
       "phone": "0214521",
       "tax": "123132312"
     }
@@ -178,40 +178,6 @@
       "address": "",
       "lastLogin": "2023-09-12T14:28:37.364Z",
       "id": 2
-    },
-    {
-      "email": "banhang@mail.com",
-      "password": "$2a$10$EN4xP01j8W7s1O4yXL9fZeYlb8.i8qnqmqPH8lu6MdRkVulkBd1yW",
-      "settingId": 1,
-      "rolesId": 3,
-      "username": "",
-      "fullName": "Ban hang",
-      "regDate": "2023-09-13T12:43:16.064Z",
-      "country": "",
-      "avatar": [],
-      "info": "",
-      "phone": "",
-      "birthday": "",
-      "address": "",
-      "lastLogin": "2023-09-13T12:43:16.064Z",
-      "id": 3
-    },
-    {
-      "email": "ban2hang@mail.com",
-      "password": "$2a$10$yHVFYUlFl6fiUvRF0tb67eQvBR5BJ4V81oFK0vZZ6wWMcx/qK7UNa",
-      "settingId": 1,
-      "rolesId": 3,
-      "username": "",
-      "fullName": "ban hang",
-      "regDate": "2023-09-13T13:06:02.165Z",
-      "country": "",
-      "avatar": [],
-      "info": "",
-      "phone": "",
-      "birthday": "",
-      "address": "",
-      "lastLogin": "2023-09-13T13:06:02.165Z",
-      "id": 4
     }
   ],
   "suppliers": [
@@ -225,7 +191,7 @@
       "address": "dsadsadadad"
     },
     {
-      "categoriesId": 1,
+      "categoriesId": 2,
       "name": "fffffffff",
       "email": "ddfsfs@fdsf.hgf",
       "phone": "5643543543",
@@ -305,11 +271,13 @@
       "images": [
         "https://picsum.photos/640/640?r=9745",
         "https://picsum.photos/640/640?r=4430",
-        "https://picsum.photos/640/640?r=8885"
+        "https://picsum.photos/640/640?r=8885",
+        "https://iili.io/JHugkRR.jpg"
       ],
       "rate": 5,
       "createAt": "2023-09-04T02:20:54.000Z",
-      "updateAt": "2023-09-04T02:20:54.000Z"
+      "updateAt": "2023-09-04T02:20:54.000Z",
+      "stock": 0
     },
     {
       "id": 9,
@@ -3044,17 +3012,55 @@
       "updateAt": "2023-09-04T02:20:54.000Z"
     },
     {
-      "id": 210,
-      "name": "New Product Japon",
-      "description": "A description",
-      "price": 10,
+      "name": "AAAAA",
+      "description": "1jhgfhfhf\njhg\njfgh\nj\ng",
+      "price": "2000",
       "categoriesId": 1,
       "images": [
-        "https://placeimg.com/640/480/any"
+        "https://iili.io/JHugPls.jpg"
       ],
       "rate": 5,
-      "createAt": "2023-09-04T14:14:15.000Z",
-      "updateAt": "2023-09-04T14:14:15.000Z"
+      "createAt": "2023-09-14T12:29:07.668Z",
+      "id": 211,
+      "stock": 0
+    },
+    {
+      "name": "CCCCC",
+      "description": "ljklkjljklj",
+      "price": "3000",
+      "categoriesId": 1,
+      "images": [
+        "https://iili.io/JHurt2a.jpg"
+      ],
+      "rate": 5,
+      "createAt": "2023-09-14T12:32:49.018Z",
+      "id": 213,
+      "stock": 0
+    },
+    {
+      "name": "XXXXXX",
+      "description": "lkljjljlj",
+      "price": "200",
+      "categoriesId": 6,
+      "images": [
+        "https://iili.io/JHBasg1.jpg"
+      ],
+      "rate": 5,
+      "createAt": "2023-09-14T12:42:56.083Z",
+      "id": 217,
+      "stock": 0
+    },
+    {
+      "name": "kkkkkk",
+      "description": "kjhkjhkjh",
+      "price": "3088",
+      "categoriesId": 3,
+      "images": [
+        "https://iili.io/JHuiTGI.jpg"
+      ],
+      "rate": 5,
+      "createAt": "2023-09-14T12:49:53.007Z",
+      "id": 218
     }
   ],
   "buys": [
@@ -3069,7 +3075,90 @@
       ],
       "createAt": "2023-09-13T13:41:46.678Z",
       "id": 1
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 7,
+          "quantity": 1200,
+          "price": 3000
+        },
+        {
+          "productsId": 1,
+          "quantity": 200,
+          "price": 10011
+        }
+      ],
+      "createAt": "2023-09-14T13:14:41.767Z",
+      "id": 2
+    },
+    {
+      "suppliersId": 2,
+      "products": [
+        {
+          "productsId": 16,
+          "quantity": 200,
+          "price": 11000
+        },
+        {
+          "productsId": 4,
+          "quantity": 1101,
+          "price": 2222
+        },
+        {
+          "productsId": 7,
+          "quantity": 222,
+          "price": 1000
+        },
+        {
+          "productsId": 10,
+          "quantity": 221,
+          "price": 221111
+        },
+        {
+          "productsId": 19,
+          "quantity": 110,
+          "price": 1222
+        },
+        {
+          "productsId": 20,
+          "quantity": 222,
+          "price": 1000
+        }
+      ],
+      "createAt": "2023-09-14T13:16:26.940Z",
+      "id": 3
+    },
+    {
+      "suppliersId": 1,
+      "products": [],
+      "createAt": "2023-09-14T13:25:53.749Z",
+      "id": 4
     }
   ],
-  "sells": []
+  "sells": [
+    {
+      "customersId": 1,
+      "products": [
+        {
+          "productsId": 4,
+          "quantity": 22,
+          "price": 10000
+        },
+        {
+          "productsId": 16,
+          "quantity": 21,
+          "price": 2200
+        },
+        {
+          "productsId": 10,
+          "quantity": 11,
+          "price": 22
+        }
+      ],
+      "createAt": "2023-09-14T13:17:01.380Z",
+      "id": 1
+    }
+  ]
 }

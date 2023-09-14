@@ -255,6 +255,8 @@ function UserListPage() {
 										value={seletedUser?.password}
 										name="password"
 										onChange={handleSelectUser}
+										disabled
+										type="password"
 									/>
 									<TextField
 										sx={{
@@ -278,11 +280,12 @@ function UserListPage() {
 										name="email"
 										onChange={handleSelectUser}
 									/>
-									<FormControl fullWidth>
+									<FormControl fullWidth variant="standard">
 										<InputLabel id="user-role-select-label">
 											Vai trò
 										</InputLabel>
 										<Select
+											sx={{ marginBottom: "1.5em" }}
 											labelId="user-role-select-label"
 											id="demo-simple-select"
 											value={seletedUser?.rolesId}

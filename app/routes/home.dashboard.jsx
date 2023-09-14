@@ -15,16 +15,18 @@ export default function DashboardPage() {
 	});
 
 	return (
-		<div>
-			<ReactWeather
-				isLoading={isLoading}
-				errorMessage={errorMessage}
-				data={data}
-				lang="en"
-				locationLabel={weatherCity}
-				unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
-				showForecast
-			/>
+		<div className="flex justify-between">
+			<div className="w-1/2">
+				<ReactWeather
+					isLoading={isLoading}
+					errorMessage={errorMessage}
+					data={data}
+					lang="en"
+					locationLabel={weatherCity}
+					unitsLabels={{ temperature: "C", windSpeed: "Km/h" }}
+					showForecast
+				/>
+			</div>
 		</div>
 	);
 }

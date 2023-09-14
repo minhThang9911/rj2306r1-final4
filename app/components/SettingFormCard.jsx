@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Card,
 	CardContent,
@@ -75,6 +76,7 @@ function SettingFormCard({ items, columns, apiType, settingTitle = "" }) {
 										{col.title}
 									</TableCell>
 								))}
+								<TableCell></TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -88,6 +90,7 @@ function SettingFormCard({ items, columns, apiType, settingTitle = "" }) {
 									<TableCell key="action">
 										<Button
 											color="error"
+											fullWidth
 											onClick={() => handleDelete(item)}>
 											<DeleteIcon />
 										</Button>
@@ -115,8 +118,10 @@ function SettingFormCard({ items, columns, apiType, settingTitle = "" }) {
 										variant="contained"
 										color="success"
 										type="submit"
+										fullWidth
 										sx={{
-											height: "100%",
+											display: "block",
+											height: "4em",
 										}}>
 										Thêm
 									</Button>

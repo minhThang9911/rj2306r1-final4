@@ -202,11 +202,12 @@ function SupplierPage() {
 									name="name"
 									onChange={handleSelectSupplier}
 								/>
-								<FormControl fullWidth>
+								<FormControl fullWidth variant="standard">
 									<InputLabel id="categories-select-label">
 										Hàng hóa cung cấp
 									</InputLabel>
 									<Select
+										sx={{ marginBottom: "1.5em" }}
 										labelId="categories-select-label"
 										id="demo-simple-select"
 										value={seletedSupplier?.roleId}

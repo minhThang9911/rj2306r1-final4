@@ -61,7 +61,7 @@ export default function SellProductPage() {
 
 	useEffect(() => {
 		if (actionData?.data) {
-			enqueueSnackbar("Thêm thành công", { variant: "success" });
+			enqueueSnackbar("Lưu thành công", { variant: "success" });
 			setExportList([]);
 		}
 		if (actionData?.error) {
